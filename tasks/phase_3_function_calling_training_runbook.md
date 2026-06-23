@@ -14,6 +14,12 @@ Datasets:
 
 ## First Message To The AI On The 5090 Machine
 
+For the full paste-ready operator prompt, use:
+
+```text
+prompts/codex_stage3_function_calling_operator.md
+```
+
 Use this prompt exactly:
 
 ```text

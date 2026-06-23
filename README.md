@@ -83,7 +83,8 @@ The third 5090 pass uses `tools/ingest_function_calling_stage3.py` to ingest
 `Salesforce/xlam-function-calling-60k`, `glaiveai/glaive-function-calling-v2`,
 and `MCPToolBench/MCPToolBenchPP` into function-calling/tool-use JSONL, then
 trains `configs/function_calling_stage3_5090_tinycore.yaml`. Follow
-`tasks/phase_3_function_calling_training_runbook.md`.
+`tasks/phase_3_function_calling_training_runbook.md`; the paste-ready 5090
+agent prompt is `prompts/codex_stage3_function_calling_operator.md`.
 The selected long-run TinyCore artifacts can be exported to `.tcmdl`; the native
 generator matches the Python runtime on compact instruction/code prompts.
 
