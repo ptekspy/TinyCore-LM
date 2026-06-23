@@ -1,0 +1,77 @@
+{
+  "name": "tinycore-code",
+  "displayName": "TinyCore Code",
+  "description": "VSCode shell for TinyCore local agent workflows.",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/extension.js",
+  "types": "dist/src/extension.d.ts",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onCommand:tinycore.ask",
+    "onCommand:tinycore.explainSelection",
+    "onCommand:tinycore.health"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "tinycore.ask",
+        "title": "TinyCore: Ask"
+      },
+      {
+        "command": "tinycore.explainSelection",
+        "title": "TinyCore: Explain Selected Code"
+      },
+      {
+        "command": "tinycore.health",
+        "title": "TinyCore: Check Server Health"
+      }
+    ],
+    "configuration": {
+      "title": "TinyCore",
+      "properties": {
+        "tinycore.serverUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8787",
+          "description": "Base URL for the local tinycored server."
+        },
+        "tinycore.askMaxTokens": {
+          "type": "number",
+          "default": 160,
+          "minimum": 1,
+          "description": "Maximum new tokens for TinyCore: Ask."
+        },
+        "tinycore.explainMaxTokens": {
+          "type": "number",
+          "default": 200,
+          "minimum": 1,
+          "description": "Maximum new tokens for TinyCore: Explain Selected Code."
+        },
+        "tinycore.temperature": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Generation temperature. Use 0 for deterministic greedy generation."
+        },
+        "tinycore.topK": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Top-k sampling limit. Use 0 for no top-k cutoff, or 1 to force greedy selection."
+        },
+        "tinycore.seed": {
+          "type": "number",
+          "default": 1337,
+          "description": "Seed used by runtimes that support seeded generation."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/*.test.js"
+  }
+}
