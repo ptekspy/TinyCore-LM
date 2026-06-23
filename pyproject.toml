@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinycore-lm"
+version = "0.1.0"
+description = "Research prototype for TinyCore-LM weight-efficient language models."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+  "torch>=2.2",
+]
+
+[project.scripts]
+tinycore-generate = "tinycore_model.generate_cli:main"
+tinycore-format = "tinycore_format.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["packages/tinycore-model/src", "packages/tinycore-format/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages/tinycore-model/tests", "packages/tinycore-format/tests"]
+pythonpath = ["packages/tinycore-model/src", "packages/tinycore-format/src"]
+addopts = "-s"

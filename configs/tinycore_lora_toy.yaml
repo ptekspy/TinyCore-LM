@@ -1,0 +1,14 @@
+model_type: tinycore_lora_v0
+vocab_size: 4096
+d_model: 128
+n_heads: 4
+n_virtual_layers: 8
+n_families: 1
+basis_rank: 4
+low_rank: 8
+mlp_ratio: 4
+max_seq_len: 128
+dropout: 0.0
+rope: false
+tie_embeddings: true
+precision_target: bf16

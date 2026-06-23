@@ -1,0 +1,54 @@
+run_group: instruction_code_long_tinycore
+seed: 1337
+device: cpu
+dataset:
+  name: tinycore_instruction_code_compact_v0
+  train_fraction: 0.9
+  repeat: 128
+model:
+  vocab_size: 128
+  d_model: 32
+  n_heads: 4
+  n_layers: 4
+  n_virtual_layers: 4
+  n_families: 1
+  basis_rank: 2
+  low_rank: 0
+  recurrent_state_dim: 8
+  mlp_ratio: 2
+  max_seq_len: 64
+  dropout: 0.0
+  rope: false
+  tie_embeddings: true
+  precision_target: fp32
+variants:
+  - name: baseline_transformer_v0
+    model_type: baseline_transformer_v0
+  - name: tinycore_recurrent_lr4_state8
+    model_type: tinycore_recurrent_v0
+    overrides:
+      low_rank: 4
+      recurrent_state_dim: 8
+  - name: tinycore_recurrent_lr8_state16
+    model_type: tinycore_recurrent_v0
+    overrides:
+      low_rank: 8
+      recurrent_state_dim: 16
+training:
+  batch_size: 8
+  seq_len: 48
+  max_steps: 1500
+  eval_interval: 250
+  lr: 0.003
+  weight_decay: 0.01
+  grad_clip: 1.0
+  select_best_eval_checkpoint: true
+generation:
+  prompt: "Q:add|A:"
+  max_new_tokens: 48
+  temperature: 0.0
+eval:
+  enabled: true
+  suite_name: instruction_code_compact_v0
+  max_new_tokens: 48
+  temperature: 0.0

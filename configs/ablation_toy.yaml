@@ -1,0 +1,52 @@
+run_group: ablation_toy
+seed: 1337
+device: cpu
+dataset:
+  name: tinycore_builtin_char_corpus_v0
+  train_fraction: 0.9
+model:
+  vocab_size: 128
+  d_model: 32
+  n_heads: 4
+  n_layers: 4
+  n_virtual_layers: 4
+  n_families: 1
+  basis_rank: 2
+  low_rank: 0
+  recurrent_state_dim: 8
+  mlp_ratio: 2
+  max_seq_len: 32
+  dropout: 0.0
+  rope: false
+  tie_embeddings: true
+  precision_target: fp32
+variants:
+  - name: baseline_transformer_v0
+    model_type: baseline_transformer_v0
+  - name: shared_layer_transformer_v0
+    model_type: shared_layer_transformer_v0
+  - name: tinycore_basis_v0
+    model_type: tinycore_basis_v0
+    overrides:
+      low_rank: 0
+  - name: tinycore_lora_v0
+    model_type: tinycore_lora_v0
+    overrides:
+      low_rank: 4
+  - name: tinycore_recurrent_v0
+    model_type: tinycore_recurrent_v0
+    overrides:
+      low_rank: 4
+      recurrent_state_dim: 8
+training:
+  batch_size: 8
+  seq_len: 32
+  max_steps: 30
+  eval_interval: 10
+  lr: 0.003
+  weight_decay: 0.01
+  grad_clip: 1.0
+generation:
+  prompt: "TinyCore"
+  max_new_tokens: 40
+  temperature: 0.8
