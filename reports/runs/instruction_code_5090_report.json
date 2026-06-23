@@ -1,34 +1,88 @@
 {
-  "completed_tasks": [
-    "T0_repo_scaffold",
-    "T1_config_schemas",
-    "T2_tokenizer_mvp",
-    "T3_dataset_packer",
-    "T4_baseline_transformer",
-    "T5_composed_linear",
-    "T6_tinycore_basis_model",
-    "T7_training_loop",
-    "T8_generation_loop",
-    "T9_parameter_accounting",
-    "T10_eval_report",
-    "T11_low_rank_deltas",
-    "T12_recurrent_virtual_depth",
-    "T13_ablation_runner",
-    "implementation_step_14_manifest_checkpoint_save_load",
-    "implementation_step_52_instruction_code_corpus_eval",
-    "implementation_step_53_best_instruction_eval_checkpoint",
-    "implementation_step_55_tinycored_native_server_regression",
-    "implementation_step_57_5090_training_corpus",
-    "implementation_step_58_5090_training_runbook",
-    "implementation_step_59_github_typescript_ingestion_pipeline",
-    "implementation_step_60_typescript_github_5090_pass",
-    "implementation_step_61_docs_site_ingestion_for_install_usage",
-    "implementation_step_62_function_calling_stage3_ingestion",
-    "implementation_step_63_function_calling_stage3_5090_pass",
-    "implementation_step_64_stage_3_tool_call_eval"
-  ],
-  "blocked_tasks": [],
-  "latest_metrics": [
+  "run_group": "instruction_code_5090_tinycore",
+  "run_id": "instruction_code_5090_tinycore",
+  "dataset": {
+    "name": "tinycore_instruction_code_5090_v0",
+    "source": "deterministic_local_generator",
+    "license_notes": "Synthetic local examples generated from repository-owned templates; no scraped or third-party text.",
+    "num_documents": 66000,
+    "num_tokens": 7933256,
+    "tokenizer": "byte_char_mvp",
+    "tokenizer_vocab_size": 128,
+    "repeat": 1,
+    "train_shards": [
+      "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\train.jsonl"
+    ],
+    "val_shards": [
+      "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\val.jsonl"
+    ],
+    "corpus_manifest": "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\manifest.json"
+  },
+  "config": {
+    "run_group": "instruction_code_5090_tinycore",
+    "seed": 1337,
+    "device": "cuda",
+    "dataset": {
+      "name": "tinycore_instruction_code_5090_v0",
+      "train_fraction": 0.9,
+      "repeat": 1
+    },
+    "model": {
+      "model_type": "tinycore_recurrent_v0",
+      "vocab_size": 128,
+      "d_model": 384,
+      "n_heads": 8,
+      "n_layers": 8,
+      "n_virtual_layers": 12,
+      "n_families": 1,
+      "basis_rank": 8,
+      "low_rank": 0,
+      "recurrent_state_dim": 64,
+      "mlp_ratio": 4,
+      "max_seq_len": 256,
+      "dropout": 0.0,
+      "rope": false,
+      "tie_embeddings": true,
+      "precision_target": "bf16"
+    },
+    "training": {
+      "batch_size": 64,
+      "seq_len": 256,
+      "max_steps": 20000,
+      "eval_interval": 1000,
+      "lr": 0.0008,
+      "weight_decay": 0.01,
+      "grad_clip": 1.0,
+      "select_best_eval_checkpoint": true
+    },
+    "generation": {
+      "prompt": "Q:py clamp|A:",
+      "max_new_tokens": 96,
+      "temperature": 0.0
+    },
+    "eval": {
+      "enabled": true,
+      "suite_name": "instruction_code_5090_holdout_v0",
+      "max_new_tokens": 96,
+      "temperature": 0.0
+    },
+    "variants": [
+      {
+        "name": "baseline_transformer_5090_v0",
+        "model_type": "baseline_transformer_v0",
+        "overrides": {}
+      },
+      {
+        "name": "tinycore_recurrent_5090_v0",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "low_rank": 16,
+          "recurrent_state_dim": 64
+        }
+      }
+    ]
+  },
+  "models": [
     {
       "name": "baseline_transformer_5090_v0",
       "train_loss_first": 236.8092041015625,
@@ -848,5 +902,6 @@
       "instruction_eval_score_per_100kib_bf16": 0.00122897421938534
     }
   ],
-  "architecture_invariant_status": "violated"
+  "conclusion": "quality_better_but_larger:tinycore_recurrent_5090_v0",
+  "next_experiment": "Add low-rank TinyCore and run an ablation."
 }

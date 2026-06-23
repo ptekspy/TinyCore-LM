@@ -1,0 +1,384 @@
+{
+  "run_group": "instruction_code_5090_smoke",
+  "run_id": "instruction_code_5090_smoke",
+  "dataset": {
+    "name": "tinycore_instruction_code_5090_v0",
+    "source": "deterministic_local_generator",
+    "license_notes": "Synthetic local examples generated from repository-owned templates; no scraped or third-party text.",
+    "num_documents": 66000,
+    "num_tokens": 7933256,
+    "tokenizer": "byte_char_mvp",
+    "tokenizer_vocab_size": 128,
+    "repeat": 1,
+    "train_shards": [
+      "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\train.jsonl"
+    ],
+    "val_shards": [
+      "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\val.jsonl"
+    ],
+    "corpus_manifest": "C:\\Users\\Patrick\\Research\\TinyCore-LM\\data\\training\\instruction_code_5090_v0\\manifest.json"
+  },
+  "config": {
+    "run_group": "instruction_code_5090_smoke",
+    "seed": 1337,
+    "device": "cuda",
+    "dataset": {
+      "name": "tinycore_instruction_code_5090_v0",
+      "train_fraction": 0.9,
+      "repeat": 1
+    },
+    "model": {
+      "model_type": "tinycore_recurrent_v0",
+      "vocab_size": 128,
+      "d_model": 384,
+      "n_heads": 8,
+      "n_layers": 8,
+      "n_virtual_layers": 12,
+      "n_families": 1,
+      "basis_rank": 8,
+      "low_rank": 0,
+      "recurrent_state_dim": 64,
+      "mlp_ratio": 4,
+      "max_seq_len": 256,
+      "dropout": 0.0,
+      "rope": false,
+      "tie_embeddings": true,
+      "precision_target": "bf16"
+    },
+    "training": {
+      "batch_size": 8,
+      "seq_len": 256,
+      "max_steps": 20,
+      "eval_interval": 10,
+      "lr": 0.0008,
+      "weight_decay": 0.01,
+      "grad_clip": 1.0,
+      "select_best_eval_checkpoint": true
+    },
+    "generation": {
+      "prompt": "Q:py clamp|A:",
+      "max_new_tokens": 96,
+      "temperature": 0.0
+    },
+    "eval": {
+      "enabled": true,
+      "suite_name": "instruction_code_5090_holdout_v0",
+      "max_new_tokens": 96,
+      "temperature": 0.0
+    },
+    "variants": [
+      {
+        "name": "baseline_transformer_5090_v0",
+        "model_type": "baseline_transformer_v0",
+        "overrides": {}
+      },
+      {
+        "name": "tinycore_recurrent_5090_v0",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "low_rank": 16,
+          "recurrent_state_dim": 64
+        }
+      }
+    ]
+  },
+  "models": [
+    {
+      "name": "baseline_transformer_5090_v0",
+      "train_loss_first": 235.3642578125,
+      "train_loss": 14.696866035461426,
+      "val_loss": 13.204089283943176,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 28.774200439453125,
+          "val_loss": 22.482905864715576,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 22.65771598815918
+        },
+        {
+          "step": 20,
+          "train_loss": 14.696866035461426,
+          "val_loss": 13.204089283943176,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 13.91613311767578
+        }
+      ],
+      "instruction_eval_curve": [
+        {
+          "step": 10,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 22.65771598815918
+        },
+        {
+          "step": 20,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 13.91613311767578
+        }
+      ],
+      "selected_checkpoint": {
+        "selection": "best_instruction_eval",
+        "step": 20,
+        "train_loss": 14.696866035461426,
+        "val_loss": 13.204089283943176,
+        "instruction_eval_mean_score": 0.0,
+        "instruction_eval_passed": 0,
+        "reference_completion_loss": 13.91613311767578
+      },
+      "tokens_per_sec": 10206.055679404915,
+      "wall_clock_time_sec": 4.013303600004292,
+      "sample_generation": "Q:py clamp|A:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_5090_holdout_v0",
+        "num_cases": 5,
+        "num_passed": 0,
+        "mean_score": 0.0,
+        "mean_reference_completion_loss": 13.91613311767578,
+        "mean_reference_completion_ppl": 1105859.0,
+        "cases": [
+          {
+            "name": "holdout_clamp",
+            "prompt": "Q:py clamp|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "def clamp",
+              "min(max"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 13.912732124328613,
+            "reference_completion_ppl": 1102104.5,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_json_training",
+            "prompt": "Q:json training|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "\"run_group\"",
+              "\"device\":\"cuda\""
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 19.907747268676758,
+            "reference_completion_ppl": 442409856.0,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_basis_tradeoff",
+            "prompt": "Q:basis tradeoff|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "basis",
+              "stored byte"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 11.4556884765625,
+            "reference_completion_ppl": 94437.0234375,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_native_verify",
+            "prompt": "Q:native verify|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "Python",
+              "native"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 11.597925186157227,
+            "reference_completion_ppl": 108871.6796875,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_best_checkpoint",
+            "prompt": "Q:best checkpoint|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "highest instruction eval score",
+              "reference loss"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 12.706572532653809,
+            "reference_completion_ppl": 329909.125,
+            "score": 0.0,
+            "passed": false
+          }
+        ]
+      },
+      "stored_unique_params": 14309760,
+      "stored_unique_bytes_fp32": 57239040.0,
+      "stored_unique_bytes_bf16": 28619520.0,
+      "stored_unique_bytes_quantized_estimate": 7154880.0,
+      "effective_materialized_params": 14309760,
+      "estimated_activation_bytes_fp32": 3145728,
+      "estimated_kv_cache_bytes_fp32": 50331648,
+      "estimated_kv_cache_bytes_per_token_fp32": 196608,
+      "model_type": "baseline_transformer_v0",
+      "overrides": {},
+      "run_id": "instruction_code_5090_smoke_baseline_transformer_5090_v0",
+      "artifact_dir": "reports\\runs\\instruction_code_5090_smoke\\baseline_transformer_5090_v0",
+      "manifest": "reports\\runs\\instruction_code_5090_smoke\\baseline_transformer_5090_v0\\manifest.json",
+      "checkpoint": "reports\\runs\\instruction_code_5090_smoke\\baseline_transformer_5090_v0\\checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.0,
+      "instruction_eval_score_per_100kib_bf16": 0.0
+    },
+    {
+      "name": "tinycore_recurrent_5090_v0",
+      "train_loss_first": 168.15234375,
+      "train_loss": 13.241147994995117,
+      "val_loss": 11.370518326759338,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 23.84464454650879,
+          "val_loss": 24.18795609474182,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 23.84510955810547
+        },
+        {
+          "step": 20,
+          "train_loss": 13.241147994995117,
+          "val_loss": 11.370518326759338,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 11.143138122558593
+        }
+      ],
+      "instruction_eval_curve": [
+        {
+          "step": 10,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 23.84510955810547
+        },
+        {
+          "step": 20,
+          "instruction_eval_mean_score": 0.0,
+          "instruction_eval_passed": 0,
+          "reference_completion_loss": 11.143138122558593
+        }
+      ],
+      "selected_checkpoint": {
+        "selection": "best_instruction_eval",
+        "step": 20,
+        "train_loss": 13.241147994995117,
+        "val_loss": 11.370518326759338,
+        "instruction_eval_mean_score": 0.0,
+        "instruction_eval_passed": 0,
+        "reference_completion_loss": 11.143138122558593
+      },
+      "tokens_per_sec": 2431.4521201335747,
+      "wall_clock_time_sec": 16.84590030000254,
+      "sample_generation": "Q:py clamp|A:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_5090_holdout_v0",
+        "num_cases": 5,
+        "num_passed": 0,
+        "mean_score": 0.0,
+        "mean_reference_completion_loss": 11.143138122558593,
+        "mean_reference_completion_ppl": 69088.109375,
+        "cases": [
+          {
+            "name": "holdout_clamp",
+            "prompt": "Q:py clamp|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "def clamp",
+              "min(max"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 10.978902816772461,
+            "reference_completion_ppl": 58624.19921875,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_json_training",
+            "prompt": "Q:json training|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "\"run_group\"",
+              "\"device\":\"cuda\""
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 12.948911666870117,
+            "reference_completion_ppl": 420378.875,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_basis_tradeoff",
+            "prompt": "Q:basis tradeoff|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "basis",
+              "stored byte"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 10.2470121383667,
+            "reference_completion_ppl": 28198.1640625,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_native_verify",
+            "prompt": "Q:native verify|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "Python",
+              "native"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 11.31953239440918,
+            "reference_completion_ppl": 82415.796875,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "holdout_best_checkpoint",
+            "prompt": "Q:best checkpoint|A:",
+            "completion": "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",
+            "expected_substrings": [
+              "highest instruction eval score",
+              "reference loss"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 10.221331596374512,
+            "reference_completion_ppl": 27483.23828125,
+            "score": 0.0,
+            "passed": false
+          }
+        ]
+      },
+      "stored_unique_params": 20830380,
+      "stored_unique_bytes_fp32": 83321520.0,
+      "stored_unique_bytes_bf16": 41660760.0,
+      "stored_unique_bytes_quantized_estimate": 10415190.0,
+      "effective_materialized_params": 28571148,
+      "estimated_activation_bytes_fp32": 3145728,
+      "estimated_kv_cache_bytes_fp32": 75497472,
+      "estimated_kv_cache_bytes_per_token_fp32": 294912,
+      "model_type": "tinycore_recurrent_v0",
+      "overrides": {
+        "low_rank": 16,
+        "recurrent_state_dim": 64
+      },
+      "run_id": "instruction_code_5090_smoke_tinycore_recurrent_5090_v0",
+      "artifact_dir": "reports\\runs\\instruction_code_5090_smoke\\tinycore_recurrent_5090_v0",
+      "manifest": "reports\\runs\\instruction_code_5090_smoke\\tinycore_recurrent_5090_v0\\manifest.json",
+      "checkpoint": "reports\\runs\\instruction_code_5090_smoke\\tinycore_recurrent_5090_v0\\checkpoint.pt",
+      "compression_ratio_vs_baseline": 0.6869658642809204,
+      "instruction_eval_score_per_100kib_bf16": 0.0
+    }
+  ],
+  "conclusion": "quality_better_but_larger:tinycore_recurrent_5090_v0",
+  "next_experiment": "Add low-rank TinyCore and run an ablation."
+}

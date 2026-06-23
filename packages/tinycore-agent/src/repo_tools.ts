@@ -299,7 +299,7 @@ export class RepoToolRegistry implements ToolRegistry {
         continue;
       }
       const fullPath = path.join(directory, entry.name);
-      const relative = path.relative(this.root, fullPath);
+      const relative = toRepoPath(path.relative(this.root, fullPath));
       if (entry.isDirectory()) {
         await this.walk(fullPath, files);
       } else if (entry.isFile()) {
@@ -369,4 +369,8 @@ function commandArg(value: unknown): string[] {
     throw new Error('Expected command as string[]');
   }
   return value;
+}
+
+function toRepoPath(relativePath: string): string {
+  return relativePath.split(path.sep).join('/');
 }
