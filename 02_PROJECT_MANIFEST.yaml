@@ -1,0 +1,105 @@
+project:
+  canonical_name: TinyCore-LM
+  version: 0.1.0-research
+  purpose: >
+    Research and prototype a weight-efficient LLM architecture where many computational
+    steps are produced from few unique stored weights using compositional basis matrices,
+    low-rank corrections, native low-bit readiness, and recurrent virtual depth.
+
+thesis:
+  one_sentence: >
+    Current LLMs waste storage by assigning huge independent matrices to every layer;
+    TinyCore-LM tests whether intelligence can be preserved by reusing a tiny learned
+    weight library with per-depth routing and small corrections.
+  hard_claims:
+    - This is an architecture-first weight reduction project, not post-training compression.
+    - Quality must be measured against a plain Transformer baseline.
+    - The model may be worse initially; the first goal is a truthful experimental loop.
+  avoid_claims:
+    - Do not claim AGI.
+    - Do not claim guaranteed 50x reduction.
+    - Do not claim OpenAI-level performance.
+    - Do not fake benchmark wins.
+
+architecture_keywords:
+  - decoder-only language model
+  - basis-composed weights
+  - cross-layer parameter sharing
+  - low-rank residual corrections
+  - native low-bit training readiness
+  - recurrent virtual depth
+  - local causal attention
+  - external retrieval memory
+  - coding-agent oriented deployment
+
+primary_metrics:
+  quality:
+    - validation_cross_entropy
+    - perplexity
+    - code_completion_accuracy
+    - small_instruction_following_eval
+  efficiency:
+    - unique_weight_bytes
+    - effective_parameter_count
+    - stored_parameter_count
+    - tokens_per_second
+    - peak_vram_mb
+    - kv_cache_bytes_per_token
+  agent:
+    - task_success_rate
+    - tests_passed_after_patch
+    - diff_minimality
+    - tool_call_efficiency
+    - hallucinated_file_rate
+
+repo_layout:
+  packages:
+    tinycore-model: PyTorch model, training, generation, checkpoints.
+    tinycore-data: tokenizer training, dataset preparation, packing.
+    tinycore-eval: baselines, metrics, benchmark runners.
+    tinycore-agent: repo tools, patch engine, tool-call protocol.
+    tinycored: local HTTP/WebSocket server wrapping model/runtime.
+    tinycore-code: VSCode extension.
+    tinycore-format: TCMDL inspection/conversion tooling.
+  runtime:
+    tinycore.cpp: native runtime target after Python proof.
+  specs:
+    description: Canonical architecture and protocol docs.
+
+language_policy:
+  python:
+    use_for:
+      - model research
+      - training
+      - eval scripts
+    stack:
+      - torch
+      - numpy
+      - tokenizers
+      - pydantic
+      - pytest
+  typescript:
+    use_for:
+      - agent loop
+      - VSCode extension
+      - local server
+      - repo indexing
+      - schemas/tools
+    stack:
+      - node
+      - tsup
+      - vitest
+      - zod
+      - vscode api
+  cpp:
+    use_for:
+      - later native runtime
+      - TCMDL loading
+      - low-bit kernels
+
+first_success_definition:
+  - A tiny TinyCore model trains without shape errors.
+  - It generates text.
+  - A baseline Transformer trains on the same data.
+  - A report compares both by validation loss and stored unique bytes.
+  - All configs and metrics are saved.

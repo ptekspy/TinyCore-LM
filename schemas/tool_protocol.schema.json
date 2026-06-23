@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TinyCore Agent Tool Protocol",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "tool",
+        "args"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "const": "tool_call"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "args": {
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "tool_call_id",
+        "type",
+        "ok",
+        "content"
+      ],
+      "properties": {
+        "tool_call_id": {
+          "type": "string"
+        },
+        "type": {
+          "const": "tool_result"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "content": {},
+        "metadata": {
+          "type": "object"
+        }
+      }
+    }
+  ]
+}

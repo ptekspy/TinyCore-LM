@@ -1,0 +1,72 @@
+{
+  "project": "TinyCore-LM",
+  "execution_order": [
+    "T0_repo_scaffold",
+    "T1_config_schemas",
+    "T2_tokenizer_mvp",
+    "T3_dataset_packer",
+    "T4_baseline_transformer",
+    "T5_composed_linear",
+    "T6_tinycore_basis_model",
+    "T7_training_loop",
+    "T8_generation_loop",
+    "T9_parameter_accounting",
+    "T10_eval_report",
+    "T11_low_rank_deltas",
+    "T12_recurrent_virtual_depth",
+    "T13_ablation_runner",
+    "T14_agent_protocol",
+    "T15_repo_tools",
+    "T16_patch_engine",
+    "T17_tinycored_server",
+    "T18_vscode_extension_shell",
+    "T19_tcmdl_manifest_tools",
+    "T20_native_runtime_spike"
+  ],
+  "tasks": {
+    "T0_repo_scaffold": {
+      "success": [
+        "packages exist",
+        "lint/test commands documented",
+        "minimal imports work"
+      ]
+    },
+    "T4_baseline_transformer": {
+      "depends_on": [
+        "T1_config_schemas"
+      ],
+      "success": [
+        "can train on toy data",
+        "loss decreases"
+      ]
+    },
+    "T5_composed_linear": {
+      "depends_on": [
+        "T1_config_schemas"
+      ],
+      "success": [
+        "matches materialized composition",
+        "reports parameter count"
+      ]
+    },
+    "T6_tinycore_basis_model": {
+      "depends_on": [
+        "T5_composed_linear"
+      ],
+      "success": [
+        "forward pass shape correct",
+        "can compute loss"
+      ]
+    },
+    "T10_eval_report": {
+      "depends_on": [
+        "T4_baseline_transformer",
+        "T6_tinycore_basis_model",
+        "T9_parameter_accounting"
+      ],
+      "success": [
+        "baseline vs TinyCore report.json produced"
+      ]
+    }
+  }
+}

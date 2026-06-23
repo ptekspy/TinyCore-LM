@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TinyCore Model Config",
+  "type": "object",
+  "required": [
+    "model_type",
+    "vocab_size",
+    "d_model",
+    "max_seq_len"
+  ],
+  "properties": {
+    "model_type": {
+      "enum": [
+        "baseline_transformer_v0",
+        "shared_layer_transformer_v0",
+        "tinycore_basis_v0",
+        "tinycore_lora_v0",
+        "tinycore_recurrent_v0"
+      ]
+    },
+    "vocab_size": {
+      "type": "integer",
+      "minimum": 128
+    },
+    "d_model": {
+      "type": "integer",
+      "minimum": 32
+    },
+    "n_heads": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "n_layers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "n_virtual_layers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "n_families": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "basis_rank": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "low_rank": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "recurrent_state_dim": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mlp_ratio": {
+      "type": "number",
+      "minimum": 1
+    },
+    "max_seq_len": {
+      "type": "integer",
+      "minimum": 16
+    },
+    "dropout": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "rope": {
+      "type": "boolean"
+    },
+    "tie_embeddings": {
+      "type": "boolean"
+    },
+    "precision_target": {
+      "enum": [
+        "fp32",
+        "bf16",
+        "fp16",
+        "int8_estimate",
+        "int4_estimate",
+        "ternary_estimate"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
