@@ -1,0 +1,7 @@
+{
+  "tokenizer_type": "byte_char_mvp",
+  "vocab_size": 128,
+  "special_tokens": [],
+  "training_corpus_manifest": "tinycore_builtin_char_corpus_v0",
+  "normalization": "ascii_mod_128"
+}

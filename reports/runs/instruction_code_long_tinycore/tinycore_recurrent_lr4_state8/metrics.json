@@ -1,0 +1,191 @@
+{
+  "name": "tinycore_recurrent_lr4_state8",
+  "train_loss_first": 18.48579978942871,
+  "train_loss": 0.051311224699020386,
+  "val_loss": 0.06436584703624249,
+  "loss_curve": [
+    {
+      "step": 250,
+      "train_loss": 1.1871932744979858,
+      "val_loss": 1.2380958944559097,
+      "instruction_eval_mean_score": 0.0,
+      "instruction_eval_passed": 0,
+      "reference_completion_loss": 1.3561690002679825
+    },
+    {
+      "step": 500,
+      "train_loss": 0.4436931610107422,
+      "val_loss": 0.42648422718048096,
+      "instruction_eval_mean_score": 0.25,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.3820294439792633
+    },
+    {
+      "step": 750,
+      "train_loss": 0.19074372947216034,
+      "val_loss": 0.19257350824773312,
+      "instruction_eval_mean_score": 0.375,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.16312833689153194
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.11135563254356384,
+      "val_loss": 0.10793837253004313,
+      "instruction_eval_mean_score": 0.5,
+      "instruction_eval_passed": 2,
+      "reference_completion_loss": 0.0960242252331227
+    },
+    {
+      "step": 1250,
+      "train_loss": 0.0934569239616394,
+      "val_loss": 0.08338368218392134,
+      "instruction_eval_mean_score": 0.375,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.12771185138262808
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.051311224699020386,
+      "val_loss": 0.06436584703624249,
+      "instruction_eval_mean_score": 0.5,
+      "instruction_eval_passed": 2,
+      "reference_completion_loss": 0.09071610344108194
+    }
+  ],
+  "instruction_eval_curve": [
+    {
+      "step": 250,
+      "instruction_eval_mean_score": 0.0,
+      "instruction_eval_passed": 0,
+      "reference_completion_loss": 1.3561690002679825
+    },
+    {
+      "step": 500,
+      "instruction_eval_mean_score": 0.25,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.3820294439792633
+    },
+    {
+      "step": 750,
+      "instruction_eval_mean_score": 0.375,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.16312833689153194
+    },
+    {
+      "step": 1000,
+      "instruction_eval_mean_score": 0.5,
+      "instruction_eval_passed": 2,
+      "reference_completion_loss": 0.0960242252331227
+    },
+    {
+      "step": 1250,
+      "instruction_eval_mean_score": 0.375,
+      "instruction_eval_passed": 1,
+      "reference_completion_loss": 0.12771185138262808
+    },
+    {
+      "step": 1500,
+      "instruction_eval_mean_score": 0.5,
+      "instruction_eval_passed": 2,
+      "reference_completion_loss": 0.09071610344108194
+    }
+  ],
+  "selected_checkpoint": {
+    "selection": "best_instruction_eval",
+    "step": 1500,
+    "train_loss": 0.051311224699020386,
+    "val_loss": 0.06436584703624249,
+    "instruction_eval_mean_score": 0.5,
+    "instruction_eval_passed": 2,
+    "reference_completion_loss": 0.09071610344108194
+  },
+  "tokens_per_sec": 23921.342964369273,
+  "wall_clock_time_sec": 24.078915671998402,
+  "sample_generation": "Q:add|A:def add(a,b):return a+b\n\nQ:rev|A:def rev(revev(s",
+  "instruction_code_eval": {
+    "suite_name": "instruction_code_compact_v0",
+    "num_cases": 4,
+    "num_passed": 2,
+    "mean_score": 0.5,
+    "mean_reference_completion_loss": 0.09071610344108194,
+    "mean_reference_completion_ppl": 1.0949580669403076,
+    "cases": [
+      {
+        "name": "compact_add",
+        "prompt": "Q:add|A:",
+        "completion": "def add(a,b):return a+b\n\nQ:rev|A:def rev(revev(s",
+        "expected_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "matched_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "reference_completion_loss": 0.04037296772003174,
+        "reference_completion_ppl": 1.0411990880966187,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_reverse",
+        "prompt": "Q:rev|A:",
+        "completion": "def rev(s):return s[::-1]\n\nQ:len|A:def couf dev(",
+        "expected_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "matched_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "reference_completion_loss": 0.023210227489471436,
+        "reference_completion_ppl": 1.0234817266464233,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_json",
+        "prompt": "Q:json|A:",
+        "completion": "def count aig tokenizer metrics checkpointsiinni",
+        "expected_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.00357986381277442,
+        "reference_completion_ppl": 1.0035862922668457,
+        "score": 0.0,
+        "passed": false
+      },
+      {
+        "name": "compact_basis",
+        "prompt": "Q:basis|A:",
+        "completion": "def reval_lore and stored_bytes\n\nQ:manifestes|A:",
+        "expected_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.29570135474205017,
+        "reference_completion_ppl": 1.3440686464309692,
+        "score": 0.0,
+        "passed": false
+      }
+    ]
+  },
+  "stored_unique_params": 36748,
+  "stored_unique_bytes_fp32": 146992.0,
+  "stored_unique_bytes_bf16": 73496.0,
+  "stored_unique_bytes_quantized_estimate": 18374.0,
+  "effective_materialized_params": 48468,
+  "estimated_activation_bytes_fp32": 49152,
+  "estimated_kv_cache_bytes_fp32": 393216,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_recurrent_v0",
+  "overrides": {
+    "low_rank": 4,
+    "recurrent_state_dim": 8
+  }
+}

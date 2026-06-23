@@ -1,0 +1,15 @@
+{
+  "run_id": "synthetic_bugfix_v0",
+  "task": "fix failing unit test due to arithmetic bug",
+  "repo_root": "/mnt/c/Users/patri/AppData/Local/Temp/tinycore-agent-eval-xrULyY",
+  "success": true,
+  "tests_passed_before_patch": false,
+  "tests_passed_after_patch": true,
+  "tool_calls": 6,
+  "invalid_tool_calls": 0,
+  "hallucinated_file_rate": 0,
+  "files_touched": 1,
+  "lines_changed": 2,
+  "wall_clock_time_sec": 0.663782111,
+  "notes": []
+}

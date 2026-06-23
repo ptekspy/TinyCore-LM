@@ -1,0 +1,38 @@
+{
+  "name": "tinycore_lora_v0",
+  "train_loss_first": 18.209131240844727,
+  "train_loss": 3.501248359680176,
+  "val_loss": 3.60271155834198,
+  "loss_curve": [
+    {
+      "step": 10,
+      "train_loss": 7.527916431427002,
+      "val_loss": 7.216473758220673
+    },
+    {
+      "step": 20,
+      "train_loss": 4.81234073638916,
+      "val_loss": 4.552609384059906
+    },
+    {
+      "step": 30,
+      "train_loss": 3.501248359680176,
+      "val_loss": 3.60271155834198
+    }
+  ],
+  "tokens_per_sec": 14518.954181811861,
+  "wall_clock_time_sec": 0.5289637189998757,
+  "sample_generation": "TinyCoreo ip  css  'o a cctt  (ha?ea ss??er  ene",
+  "stored_unique_params": 34456,
+  "stored_unique_bytes_fp32": 137824.0,
+  "stored_unique_bytes_bf16": 68912.0,
+  "stored_unique_bytes_quantized_estimate": 17228.0,
+  "effective_materialized_params": 46176,
+  "estimated_activation_bytes_fp32": 32768,
+  "estimated_kv_cache_bytes_fp32": 262144,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_lora_v0",
+  "overrides": {
+    "low_rank": 4
+  }
+}

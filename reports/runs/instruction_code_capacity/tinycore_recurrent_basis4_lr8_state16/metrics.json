@@ -1,0 +1,121 @@
+{
+  "name": "tinycore_recurrent_basis4_lr8_state16",
+  "train_loss_first": 20.46744155883789,
+  "train_loss": 0.4507165849208832,
+  "val_loss": 0.4275890327990055,
+  "loss_curve": [
+    {
+      "step": 100,
+      "train_loss": 2.517585515975952,
+      "val_loss": 2.50799497961998
+    },
+    {
+      "step": 200,
+      "train_loss": 1.5931806564331055,
+      "val_loss": 1.673893466591835
+    },
+    {
+      "step": 300,
+      "train_loss": 1.2765377759933472,
+      "val_loss": 1.114067405462265
+    },
+    {
+      "step": 400,
+      "train_loss": 0.8259255290031433,
+      "val_loss": 0.6856153979897499
+    },
+    {
+      "step": 500,
+      "train_loss": 0.4507165849208832,
+      "val_loss": 0.4275890327990055
+    }
+  ],
+  "tokens_per_sec": 26923.450628885937,
+  "wall_clock_time_sec": 7.131329584997729,
+  "sample_generation": "Q:add|A:def adda,b):return a+b\n\nQ:rev|A:defef reff):def ",
+  "instruction_code_eval": {
+    "suite_name": "instruction_code_compact_v0",
+    "num_cases": 4,
+    "num_passed": 1,
+    "mean_score": 0.375,
+    "mean_reference_completion_loss": 0.29260894283652306,
+    "mean_reference_completion_ppl": 1.3399187326431274,
+    "cases": [
+      {
+        "name": "compact_add",
+        "prompt": "Q:add|A:",
+        "completion": "def adda,b):return a+b\n\nQ:rev|A:defef reff):def ",
+        "expected_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "matched_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "reference_completion_loss": 0.14047347009181976,
+        "reference_completion_ppl": 1.1508185863494873,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_reverse",
+        "prompt": "Q:rev|A:",
+        "completion": "def rev(s):return s[::-1\n\nQ:len|A:def count(ef r",
+        "expected_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "matched_substrings": [
+          "def rev"
+        ],
+        "reference_completion_loss": 0.1314454972743988,
+        "reference_completion_ppl": 1.1404757499694824,
+        "score": 0.5,
+        "passed": false
+      },
+      {
+        "name": "compact_json",
+        "prompt": "Q:json|A:",
+        "completion": "savavad refig counfize toicl tr aing checed cker",
+        "expected_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.19336697459220886,
+        "reference_completion_ppl": 1.2133280038833618,
+        "score": 0.0,
+        "passed": false
+      },
+      {
+        "name": "compact_basis",
+        "prompt": "Q:basis|A:",
+        "completion": "dddddd(ad(a,b):re aQ:rn a+b\n\nQ:rev|A:def ref ren",
+        "expected_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.7051498293876648,
+        "reference_completion_ppl": 2.0241498947143555,
+        "score": 0.0,
+        "passed": false
+      }
+    ]
+  },
+  "stored_unique_params": 67636,
+  "stored_unique_bytes_fp32": 270544.0,
+  "stored_unique_bytes_bf16": 135272.0,
+  "stored_unique_bytes_quantized_estimate": 33818.0,
+  "effective_materialized_params": 50116,
+  "estimated_activation_bytes_fp32": 49152,
+  "estimated_kv_cache_bytes_fp32": 393216,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_recurrent_v0",
+  "overrides": {
+    "basis_rank": 4,
+    "low_rank": 8,
+    "recurrent_state_dim": 16
+  }
+}

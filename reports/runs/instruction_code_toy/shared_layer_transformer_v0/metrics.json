@@ -1,0 +1,114 @@
+{
+  "name": "shared_layer_transformer_v0",
+  "train_loss_first": 19.35741424560547,
+  "train_loss": 0.6216877102851868,
+  "val_loss": 0.7666037455201149,
+  "loss_curve": [
+    {
+      "step": 100,
+      "train_loss": 2.567028760910034,
+      "val_loss": 2.6570684611797333
+    },
+    {
+      "step": 200,
+      "train_loss": 1.935249924659729,
+      "val_loss": 1.9000293463468552
+    },
+    {
+      "step": 300,
+      "train_loss": 1.5718984603881836,
+      "val_loss": 1.4815654754638672
+    },
+    {
+      "step": 400,
+      "train_loss": 0.7981575131416321,
+      "val_loss": 1.0209804251790047
+    },
+    {
+      "step": 500,
+      "train_loss": 0.6216877102851868,
+      "val_loss": 0.7666037455201149
+    }
+  ],
+  "tokens_per_sec": 56646.02602612153,
+  "wall_clock_time_sec": 3.389469896996161,
+  "sample_generation": "Q:add|A:def ad(a,b):retureturn b\nQ:rev|A:ref rev(at bbbb",
+  "instruction_code_eval": {
+    "suite_name": "instruction_code_compact_v0",
+    "num_cases": 4,
+    "num_passed": 0,
+    "mean_score": 0.125,
+    "mean_reference_completion_loss": 0.6587496176362038,
+    "mean_reference_completion_ppl": 1.9323747158050537,
+    "cases": [
+      {
+        "name": "compact_add",
+        "prompt": "Q:add|A:",
+        "completion": "def ad(a,b):retureturn b\nQ:rev|A:ref rev(at bbbb",
+        "expected_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.7671621441841125,
+        "reference_completion_ppl": 2.1536457538604736,
+        "score": 0.0,
+        "passed": false
+      },
+      {
+        "name": "compact_reverse",
+        "prompt": "Q:rev|A:",
+        "completion": "def cont(xs):return len(xs)\n\nQ:rn|A:rereton bbbb",
+        "expected_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.4118957817554474,
+        "reference_completion_ppl": 1.5096770524978638,
+        "score": 0.0,
+        "passed": false
+      },
+      {
+        "name": "compact_json",
+        "prompt": "Q:json|A:",
+        "completion": "tok\":tokens\":[1,2,3]}\n\nQ:basisisis|A:ref t vvevo",
+        "expected_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "matched_substrings": [
+          "tokens"
+        ],
+        "reference_completion_loss": 0.6650440692901611,
+        "reference_completion_ppl": 1.9445762634277344,
+        "score": 0.5,
+        "passed": false
+      },
+      {
+        "name": "compact_basis",
+        "prompt": "Q:basis|A:",
+        "completion": "s vef refifig ckponizmetrinickpoinininicretr cla",
+        "expected_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.790896475315094,
+        "reference_completion_ppl": 2.2053725719451904,
+        "score": 0.0,
+        "passed": false
+      }
+    ]
+  },
+  "stored_unique_params": 14432,
+  "stored_unique_bytes_fp32": 57728.0,
+  "stored_unique_bytes_bf16": 28864.0,
+  "stored_unique_bytes_quantized_estimate": 7216.0,
+  "effective_materialized_params": 39200,
+  "estimated_activation_bytes_fp32": 49152,
+  "estimated_kv_cache_bytes_fp32": 393216,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "shared_layer_transformer_v0",
+  "overrides": {}
+}

@@ -1,0 +1,38 @@
+{
+  "name": "tinycore_basis_v0",
+  "train_loss_first": 19.839338302612305,
+  "train_loss": 3.651719570159912,
+  "val_loss": 3.5224369168281555,
+  "loss_curve": [
+    {
+      "step": 10,
+      "train_loss": 9.132631301879883,
+      "val_loss": 8.593571901321411
+    },
+    {
+      "step": 20,
+      "train_loss": 4.633208274841309,
+      "val_loss": 4.5596723556518555
+    },
+    {
+      "step": 30,
+      "train_loss": 3.651719570159912,
+      "val_loss": 3.5224369168281555
+    }
+  ],
+  "tokens_per_sec": 21725.752382598363,
+  "wall_clock_time_sec": 0.35349753899208736,
+  "sample_generation": "TinyCoressmeQuB  ieisnee ireI\u0010sssI ee  rcl \u001fesu\u0010",
+  "stored_unique_params": 25752,
+  "stored_unique_bytes_fp32": 103008.0,
+  "stored_unique_bytes_bf16": 51504.0,
+  "stored_unique_bytes_quantized_estimate": 12876.0,
+  "effective_materialized_params": 46176,
+  "estimated_activation_bytes_fp32": 32768,
+  "estimated_kv_cache_bytes_fp32": 262144,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_basis_v0",
+  "overrides": {
+    "low_rank": 0
+  }
+}

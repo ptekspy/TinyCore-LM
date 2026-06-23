@@ -1,0 +1,306 @@
+{
+  "run_group": "ablation_toy",
+  "run_id": "ablation_toy",
+  "dataset": {
+    "name": "tinycore_builtin_char_corpus_v0",
+    "source": "synthetic_builtin_text",
+    "license_notes": "Generated local toy corpus for architecture smoke tests.",
+    "num_documents": 1,
+    "num_tokens": 9312,
+    "tokenizer": "byte_char_mvp",
+    "tokenizer_vocab_size": 128,
+    "train_shards": [],
+    "val_shards": []
+  },
+  "config": {
+    "run_group": "ablation_toy",
+    "seed": 1337,
+    "device": "cpu",
+    "dataset": {
+      "name": "tinycore_builtin_char_corpus_v0",
+      "train_fraction": 0.9
+    },
+    "model": {
+      "model_type": "tinycore_basis_v0",
+      "vocab_size": 128,
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 4,
+      "n_virtual_layers": 4,
+      "n_families": 1,
+      "basis_rank": 2,
+      "low_rank": 0,
+      "recurrent_state_dim": 8,
+      "mlp_ratio": 2,
+      "max_seq_len": 32,
+      "dropout": 0.0,
+      "rope": false,
+      "tie_embeddings": true,
+      "precision_target": "fp32"
+    },
+    "training": {
+      "batch_size": 8,
+      "seq_len": 32,
+      "max_steps": 30,
+      "eval_interval": 10,
+      "lr": 0.003,
+      "weight_decay": 0.01,
+      "grad_clip": 1.0
+    },
+    "generation": {
+      "prompt": "TinyCore",
+      "max_new_tokens": 40,
+      "temperature": 0.8
+    },
+    "variants": [
+      {
+        "name": "baseline_transformer_v0",
+        "model_type": "baseline_transformer_v0",
+        "overrides": {}
+      },
+      {
+        "name": "shared_layer_transformer_v0",
+        "model_type": "shared_layer_transformer_v0",
+        "overrides": {}
+      },
+      {
+        "name": "tinycore_basis_v0",
+        "model_type": "tinycore_basis_v0",
+        "overrides": {
+          "low_rank": 0
+        }
+      },
+      {
+        "name": "tinycore_lora_v0",
+        "model_type": "tinycore_lora_v0",
+        "overrides": {
+          "low_rank": 4
+        }
+      },
+      {
+        "name": "tinycore_recurrent_v0",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "low_rank": 4,
+          "recurrent_state_dim": 8
+        }
+      }
+    ]
+  },
+  "models": [
+    {
+      "name": "baseline_transformer_v0",
+      "train_loss_first": 20.772857666015625,
+      "train_loss": 3.5722668170928955,
+      "val_loss": 3.7206575870513916,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 8.704183578491211,
+          "val_loss": 8.070175528526306
+        },
+        {
+          "step": 20,
+          "train_loss": 4.81184720993042,
+          "val_loss": 4.5278812646865845
+        },
+        {
+          "step": 30,
+          "train_loss": 3.5722668170928955,
+          "val_loss": 3.7206575870513916
+        }
+      ],
+      "tokens_per_sec": 22480.455593769326,
+      "wall_clock_time_sec": 0.3416300869866973,
+      "sample_generation": "TinyCore s, BBBfosff uusseeI.} sstssllllt\t\t\teuss",
+      "stored_unique_params": 38176,
+      "stored_unique_bytes_fp32": 152704.0,
+      "stored_unique_bytes_bf16": 76352.0,
+      "stored_unique_bytes_quantized_estimate": 19088.0,
+      "effective_materialized_params": 38176,
+      "estimated_activation_bytes_fp32": 32768,
+      "estimated_kv_cache_bytes_fp32": 262144,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "baseline_transformer_v0",
+      "overrides": {},
+      "run_id": "ablation_toy_baseline_transformer_v0",
+      "artifact_dir": "reports/runs/ablation_toy/baseline_transformer_v0",
+      "manifest": "reports/runs/ablation_toy/baseline_transformer_v0/manifest.json",
+      "checkpoint": "reports/runs/ablation_toy/baseline_transformer_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.0
+    },
+    {
+      "name": "shared_layer_transformer_v0",
+      "train_loss_first": 18.970428466796875,
+      "train_loss": 3.7553305625915527,
+      "val_loss": 3.493118494749069,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 6.494231224060059,
+          "val_loss": 6.020112156867981
+        },
+        {
+          "step": 20,
+          "train_loss": 3.8987061977386475,
+          "val_loss": 3.971861869096756
+        },
+        {
+          "step": 30,
+          "train_loss": 3.7553305625915527,
+          "val_loss": 3.493118494749069
+        }
+      ],
+      "tokens_per_sec": 38103.61900119334,
+      "wall_clock_time_sec": 0.2015556580008706,
+      "sample_generation": "TinyCorea\nuNDhheeirrnddtmp s.e,  rr,edsuli eeiri",
+      "stored_unique_params": 13408,
+      "stored_unique_bytes_fp32": 53632.0,
+      "stored_unique_bytes_bf16": 26816.0,
+      "stored_unique_bytes_quantized_estimate": 6704.0,
+      "effective_materialized_params": 38176,
+      "estimated_activation_bytes_fp32": 32768,
+      "estimated_kv_cache_bytes_fp32": 262144,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "shared_layer_transformer_v0",
+      "overrides": {},
+      "run_id": "ablation_toy_shared_layer_transformer_v0",
+      "artifact_dir": "reports/runs/ablation_toy/shared_layer_transformer_v0",
+      "manifest": "reports/runs/ablation_toy/shared_layer_transformer_v0/manifest.json",
+      "checkpoint": "reports/runs/ablation_toy/shared_layer_transformer_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 2.847255369928401
+    },
+    {
+      "name": "tinycore_basis_v0",
+      "train_loss_first": 19.839338302612305,
+      "train_loss": 3.651719570159912,
+      "val_loss": 3.5224369168281555,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 9.132631301879883,
+          "val_loss": 8.593571901321411
+        },
+        {
+          "step": 20,
+          "train_loss": 4.633208274841309,
+          "val_loss": 4.5596723556518555
+        },
+        {
+          "step": 30,
+          "train_loss": 3.651719570159912,
+          "val_loss": 3.5224369168281555
+        }
+      ],
+      "tokens_per_sec": 21725.752382598363,
+      "wall_clock_time_sec": 0.35349753899208736,
+      "sample_generation": "TinyCoressmeQuB  ieisnee ireI\u0010sssI ee  rcl \u001fesu\u0010",
+      "stored_unique_params": 25752,
+      "stored_unique_bytes_fp32": 103008.0,
+      "stored_unique_bytes_bf16": 51504.0,
+      "stored_unique_bytes_quantized_estimate": 12876.0,
+      "effective_materialized_params": 46176,
+      "estimated_activation_bytes_fp32": 32768,
+      "estimated_kv_cache_bytes_fp32": 262144,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_basis_v0",
+      "overrides": {
+        "low_rank": 0
+      },
+      "run_id": "ablation_toy_tinycore_basis_v0",
+      "artifact_dir": "reports/runs/ablation_toy/tinycore_basis_v0",
+      "manifest": "reports/runs/ablation_toy/tinycore_basis_v0/manifest.json",
+      "checkpoint": "reports/runs/ablation_toy/tinycore_basis_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.4824479652065858
+    },
+    {
+      "name": "tinycore_lora_v0",
+      "train_loss_first": 18.209131240844727,
+      "train_loss": 3.501248359680176,
+      "val_loss": 3.60271155834198,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 7.527916431427002,
+          "val_loss": 7.216473758220673
+        },
+        {
+          "step": 20,
+          "train_loss": 4.81234073638916,
+          "val_loss": 4.552609384059906
+        },
+        {
+          "step": 30,
+          "train_loss": 3.501248359680176,
+          "val_loss": 3.60271155834198
+        }
+      ],
+      "tokens_per_sec": 14518.954181811861,
+      "wall_clock_time_sec": 0.5289637189998757,
+      "sample_generation": "TinyCoreo ip  css  'o a cctt  (ha?ea ss??er  ene",
+      "stored_unique_params": 34456,
+      "stored_unique_bytes_fp32": 137824.0,
+      "stored_unique_bytes_bf16": 68912.0,
+      "stored_unique_bytes_quantized_estimate": 17228.0,
+      "effective_materialized_params": 46176,
+      "estimated_activation_bytes_fp32": 32768,
+      "estimated_kv_cache_bytes_fp32": 262144,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_lora_v0",
+      "overrides": {
+        "low_rank": 4
+      },
+      "run_id": "ablation_toy_tinycore_lora_v0",
+      "artifact_dir": "reports/runs/ablation_toy/tinycore_lora_v0",
+      "manifest": "reports/runs/ablation_toy/tinycore_lora_v0/manifest.json",
+      "checkpoint": "reports/runs/ablation_toy/tinycore_lora_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.1079637798931972
+    },
+    {
+      "name": "tinycore_recurrent_v0",
+      "train_loss_first": 18.92125129699707,
+      "train_loss": 3.5527966022491455,
+      "val_loss": 3.315534681081772,
+      "loss_curve": [
+        {
+          "step": 10,
+          "train_loss": 7.412393093109131,
+          "val_loss": 6.703380227088928
+        },
+        {
+          "step": 20,
+          "train_loss": 4.085496425628662,
+          "val_loss": 3.9675742089748383
+        },
+        {
+          "step": 30,
+          "train_loss": 3.5527966022491455,
+          "val_loss": 3.315534681081772
+        }
+      ],
+      "tokens_per_sec": 13815.903957356166,
+      "wall_clock_time_sec": 0.5558811080118176,
+      "sample_generation": "TinyCore s*ar+sr eep ep%s eh e empmue.emrt cews ",
+      "stored_unique_params": 35724,
+      "stored_unique_bytes_fp32": 142896.0,
+      "stored_unique_bytes_bf16": 71448.0,
+      "stored_unique_bytes_quantized_estimate": 17862.0,
+      "effective_materialized_params": 47444,
+      "estimated_activation_bytes_fp32": 32768,
+      "estimated_kv_cache_bytes_fp32": 262144,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_recurrent_v0",
+      "overrides": {
+        "low_rank": 4,
+        "recurrent_state_dim": 8
+      },
+      "run_id": "ablation_toy_tinycore_recurrent_v0",
+      "artifact_dir": "reports/runs/ablation_toy/tinycore_recurrent_v0",
+      "manifest": "reports/runs/ablation_toy/tinycore_recurrent_v0/manifest.json",
+      "checkpoint": "reports/runs/ablation_toy/tinycore_recurrent_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.0686373306460644
+    }
+  ],
+  "conclusion": "best_compressed_better:tinycore_recurrent_v0",
+  "next_experiment": "Tune recurrent state and low-rank budgets, then move to reproducible checkpoint manifests."
+}

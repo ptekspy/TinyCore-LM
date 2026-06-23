@@ -1,0 +1,36 @@
+{
+  "name": "shared_layer_transformer_v0",
+  "train_loss_first": 18.970428466796875,
+  "train_loss": 3.7553305625915527,
+  "val_loss": 3.493118494749069,
+  "loss_curve": [
+    {
+      "step": 10,
+      "train_loss": 6.494231224060059,
+      "val_loss": 6.020112156867981
+    },
+    {
+      "step": 20,
+      "train_loss": 3.8987061977386475,
+      "val_loss": 3.971861869096756
+    },
+    {
+      "step": 30,
+      "train_loss": 3.7553305625915527,
+      "val_loss": 3.493118494749069
+    }
+  ],
+  "tokens_per_sec": 38103.61900119334,
+  "wall_clock_time_sec": 0.2015556580008706,
+  "sample_generation": "TinyCorea\nuNDhheeirrnddtmp s.e,  rr,edsuli eeiri",
+  "stored_unique_params": 13408,
+  "stored_unique_bytes_fp32": 53632.0,
+  "stored_unique_bytes_bf16": 26816.0,
+  "stored_unique_bytes_quantized_estimate": 6704.0,
+  "effective_materialized_params": 38176,
+  "estimated_activation_bytes_fp32": 32768,
+  "estimated_kv_cache_bytes_fp32": 262144,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "shared_layer_transformer_v0",
+  "overrides": {}
+}

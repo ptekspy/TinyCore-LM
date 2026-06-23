@@ -1,0 +1,194 @@
+{
+  "name": "baseline_transformer_v0",
+  "train_loss_first": 20.301713943481445,
+  "train_loss": 0.08541766554117203,
+  "val_loss": 0.09412721265107393,
+  "loss_curve": [
+    {
+      "step": 250,
+      "train_loss": 0.7608680129051208,
+      "val_loss": 0.8139256983995438,
+      "instruction_eval_mean_score": 0.0,
+      "instruction_eval_passed": 0,
+      "reference_completion_loss": 0.5513811260461807
+    },
+    {
+      "step": 500,
+      "train_loss": 0.20714397728443146,
+      "val_loss": 0.20446106232702732,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.19474717555567622
+    },
+    {
+      "step": 750,
+      "train_loss": 0.12505760788917542,
+      "val_loss": 0.13175837974995375,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.1591588866431266
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.10616984218358994,
+      "val_loss": 0.10581261478364468,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.18137205590028316
+    },
+    {
+      "step": 1250,
+      "train_loss": 0.08541766554117203,
+      "val_loss": 0.09412721265107393,
+      "instruction_eval_mean_score": 1.0,
+      "instruction_eval_passed": 4,
+      "reference_completion_loss": 0.16839614362106659
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.09788402169942856,
+      "val_loss": 0.10067638102918863,
+      "instruction_eval_mean_score": 1.0,
+      "instruction_eval_passed": 4,
+      "reference_completion_loss": 0.19109719120024238
+    }
+  ],
+  "instruction_eval_curve": [
+    {
+      "step": 250,
+      "instruction_eval_mean_score": 0.0,
+      "instruction_eval_passed": 0,
+      "reference_completion_loss": 0.5513811260461807
+    },
+    {
+      "step": 500,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.19474717555567622
+    },
+    {
+      "step": 750,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.1591588866431266
+    },
+    {
+      "step": 1000,
+      "instruction_eval_mean_score": 0.875,
+      "instruction_eval_passed": 3,
+      "reference_completion_loss": 0.18137205590028316
+    },
+    {
+      "step": 1250,
+      "instruction_eval_mean_score": 1.0,
+      "instruction_eval_passed": 4,
+      "reference_completion_loss": 0.16839614362106659
+    },
+    {
+      "step": 1500,
+      "instruction_eval_mean_score": 1.0,
+      "instruction_eval_passed": 4,
+      "reference_completion_loss": 0.19109719120024238
+    }
+  ],
+  "selected_checkpoint": {
+    "selection": "best_instruction_eval",
+    "step": 1250,
+    "train_loss": 0.08541766554117203,
+    "val_loss": 0.09412721265107393,
+    "instruction_eval_mean_score": 1.0,
+    "instruction_eval_passed": 4,
+    "reference_completion_loss": 0.16839614362106659
+  },
+  "tokens_per_sec": 47616.429640451366,
+  "wall_clock_time_sec": 12.096665045013651,
+  "sample_generation": "Q:add|A:def add(a,b):return a+b\n\nQ:rev|A:def rev(ain ret",
+  "instruction_code_eval": {
+    "suite_name": "instruction_code_compact_v0",
+    "num_cases": 4,
+    "num_passed": 4,
+    "mean_score": 1.0,
+    "mean_reference_completion_loss": 0.16839614362106659,
+    "mean_reference_completion_ppl": 1.1834052801132202,
+    "cases": [
+      {
+        "name": "compact_add",
+        "prompt": "Q:add|A:",
+        "completion": "def add(a,b):return a+b\n\nQ:rev|A:def rev(ain ret",
+        "expected_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "matched_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "reference_completion_loss": 0.003500488353893161,
+        "reference_completion_ppl": 1.0035066604614258,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_reverse",
+        "prompt": "Q:rev|A:",
+        "completion": "def rev(s):return s[::-1]\n\nQ:len|A:def coren( an",
+        "expected_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "matched_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "reference_completion_loss": 0.02040213719010353,
+        "reference_completion_ppl": 1.0206116437911987,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_json",
+        "prompt": "Q:json|A:",
+        "completion": "{\"ok\":true,\"tokens\":[1,2,3]}\n\nQ:basis|A:resokhhh",
+        "expected_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "matched_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "reference_completion_loss": 0.001465701381675899,
+        "reference_completion_ppl": 1.0014667510986328,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_basis",
+        "prompt": "Q:basis|A:",
+        "completion": "reuse basis weights across virtual layen_ai5xs(x",
+        "expected_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "matched_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "reference_completion_loss": 0.6482162475585938,
+        "reference_completion_ppl": 1.9121270179748535,
+        "score": 1.0,
+        "passed": true
+      }
+    ]
+  },
+  "stored_unique_params": 39200,
+  "stored_unique_bytes_fp32": 156800.0,
+  "stored_unique_bytes_bf16": 78400.0,
+  "stored_unique_bytes_quantized_estimate": 19600.0,
+  "effective_materialized_params": 39200,
+  "estimated_activation_bytes_fp32": 49152,
+  "estimated_kv_cache_bytes_fp32": 393216,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "baseline_transformer_v0",
+  "overrides": {}
+}

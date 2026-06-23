@@ -1,0 +1,122 @@
+{
+  "name": "tinycore_recurrent_lr8_state16",
+  "train_loss_first": 19.513277053833008,
+  "train_loss": 0.43035006523132324,
+  "val_loss": 0.38228001445531845,
+  "loss_curve": [
+    {
+      "step": 100,
+      "train_loss": 2.463338851928711,
+      "val_loss": 2.5071164965629578
+    },
+    {
+      "step": 200,
+      "train_loss": 1.7613722085952759,
+      "val_loss": 1.609042540192604
+    },
+    {
+      "step": 300,
+      "train_loss": 1.2529491186141968,
+      "val_loss": 1.1059686914086342
+    },
+    {
+      "step": 400,
+      "train_loss": 0.6218123435974121,
+      "val_loss": 0.6336381062865257
+    },
+    {
+      "step": 500,
+      "train_loss": 0.43035006523132324,
+      "val_loss": 0.38228001445531845
+    }
+  ],
+  "tokens_per_sec": 26918.04613438741,
+  "wall_clock_time_sec": 7.132761383996694,
+  "sample_generation": "Q:add|A:def def ad(a,b):return a+b\n\n\nQ:rev|A:dev|A:dev(s",
+  "instruction_code_eval": {
+    "suite_name": "instruction_code_compact_v0",
+    "num_cases": 4,
+    "num_passed": 1,
+    "mean_score": 0.5,
+    "mean_reference_completion_loss": 0.2547821141779423,
+    "mean_reference_completion_ppl": 1.2901804447174072,
+    "cases": [
+      {
+        "name": "compact_add",
+        "prompt": "Q:add|A:",
+        "completion": "def def ad(a,b):return a+b\n\n\nQ:rev|A:dev|A:dev(s",
+        "expected_substrings": [
+          "def add",
+          "return a+b"
+        ],
+        "matched_substrings": [
+          "return a+b"
+        ],
+        "reference_completion_loss": 0.16367481648921967,
+        "reference_completion_ppl": 1.1778312921524048,
+        "score": 0.5,
+        "passed": false
+      },
+      {
+        "name": "compact_reverse",
+        "prompt": "Q:rev|A:",
+        "completion": "def rev(s):return s[::-1]\n\nQ:len|A:def conssefue",
+        "expected_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "matched_substrings": [
+          "def rev",
+          "[::-1]"
+        ],
+        "reference_completion_loss": 0.12372376024723053,
+        "reference_completion_ppl": 1.13170325756073,
+        "score": 1.0,
+        "passed": true
+      },
+      {
+        "name": "compact_json",
+        "prompt": "Q:json|A:",
+        "completion": "{\":tre,\"tokenstokens\nQ:byten|A:r bavis to3]arnst",
+        "expected_substrings": [
+          "{\"ok\":true",
+          "tokens"
+        ],
+        "matched_substrings": [
+          "tokens"
+        ],
+        "reference_completion_loss": 0.21992351114749908,
+        "reference_completion_ppl": 1.2459814548492432,
+        "score": 0.5,
+        "passed": false
+      },
+      {
+        "name": "compact_basis",
+        "prompt": "Q:basis|A:",
+        "completion": "re s weihts acrosss virtual l l lal lart\nQ:trtus",
+        "expected_substrings": [
+          "reuse",
+          "basis"
+        ],
+        "matched_substrings": [],
+        "reference_completion_loss": 0.5118063688278198,
+        "reference_completion_ppl": 1.668302059173584,
+        "score": 0.0,
+        "passed": false
+      }
+    ]
+  },
+  "stored_unique_params": 47100,
+  "stored_unique_bytes_fp32": 188400.0,
+  "stored_unique_bytes_bf16": 94200.0,
+  "stored_unique_bytes_quantized_estimate": 23550.0,
+  "effective_materialized_params": 50116,
+  "estimated_activation_bytes_fp32": 49152,
+  "estimated_kv_cache_bytes_fp32": 393216,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_recurrent_v0",
+  "overrides": {
+    "low_rank": 8,
+    "recurrent_state_dim": 16
+  }
+}

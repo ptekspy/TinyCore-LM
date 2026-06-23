@@ -1,0 +1,480 @@
+{
+  "format": "TCMDL",
+  "format_version": "0.1.0-python-manifest",
+  "architecture": "tinycore_recurrent_v0",
+  "run_id": "instruction_code_long_tinycore_tinycore_recurrent_lr8_state16",
+  "model_name": "tinycore_recurrent_lr8_state16",
+  "created_at": "2026-06-22T22:11:46.299312+00:00",
+  "model": {
+    "model_type": "tinycore_recurrent_v0",
+    "vocab_size": 128,
+    "d_model": 32,
+    "n_heads": 4,
+    "n_layers": 4,
+    "n_virtual_layers": 4,
+    "n_families": 1,
+    "basis_rank": 2,
+    "low_rank": 8,
+    "recurrent_state_dim": 16,
+    "mlp_ratio": 2,
+    "max_seq_len": 64,
+    "dropout": 0.0,
+    "rope": false,
+    "tie_embeddings": true,
+    "precision_target": "fp32"
+  },
+  "dataset": {
+    "name": "tinycore_instruction_code_compact_v0",
+    "source": "synthetic_builtin_text",
+    "license_notes": "Generated local toy corpus for architecture and instruction/code smoke tests.",
+    "num_documents": 1024,
+    "num_tokens": 44672,
+    "tokenizer": "byte_char_mvp",
+    "tokenizer_vocab_size": 128,
+    "repeat": 128,
+    "train_shards": [],
+    "val_shards": []
+  },
+  "tokenizer": {
+    "type": "byte_char_mvp",
+    "vocab_size": 128,
+    "section": "tokenizer.json"
+  },
+  "quantization": {
+    "basis": "fp32",
+    "routes": "fp32",
+    "low_rank": "fp32"
+  },
+  "sections": [
+    {
+      "name": "token_emb.weight",
+      "dtype": "float32",
+      "shape": [
+        128,
+        32
+      ],
+      "offset": 0,
+      "length": 16384
+    },
+    {
+      "name": "pos_emb.weight",
+      "dtype": "float32",
+      "shape": [
+        64,
+        32
+      ],
+      "offset": 16384,
+      "length": 8192
+    },
+    {
+      "name": "block.state_gate",
+      "dtype": "float32",
+      "shape": [
+        4
+      ],
+      "offset": 24576,
+      "length": 16
+    },
+    {
+      "name": "block.norm1.weight",
+      "dtype": "float32",
+      "shape": [
+        32
+      ],
+      "offset": 24592,
+      "length": 128
+    },
+    {
+      "name": "block.norm2.weight",
+      "dtype": "float32",
+      "shape": [
+        32
+      ],
+      "offset": 24720,
+      "length": 128
+    },
+    {
+      "name": "block.q.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        32
+      ],
+      "offset": 24848,
+      "length": 8192
+    },
+    {
+      "name": "block.q.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 33040,
+      "length": 32
+    },
+    {
+      "name": "block.q.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 33072,
+      "length": 4096
+    },
+    {
+      "name": "block.q.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        32
+      ],
+      "offset": 37168,
+      "length": 4096
+    },
+    {
+      "name": "block.k.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        32
+      ],
+      "offset": 41264,
+      "length": 8192
+    },
+    {
+      "name": "block.k.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 49456,
+      "length": 32
+    },
+    {
+      "name": "block.k.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 49488,
+      "length": 4096
+    },
+    {
+      "name": "block.k.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        32
+      ],
+      "offset": 53584,
+      "length": 4096
+    },
+    {
+      "name": "block.v.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        32
+      ],
+      "offset": 57680,
+      "length": 8192
+    },
+    {
+      "name": "block.v.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 65872,
+      "length": 32
+    },
+    {
+      "name": "block.v.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 65904,
+      "length": 4096
+    },
+    {
+      "name": "block.v.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        32
+      ],
+      "offset": 70000,
+      "length": 4096
+    },
+    {
+      "name": "block.o.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        32
+      ],
+      "offset": 74096,
+      "length": 8192
+    },
+    {
+      "name": "block.o.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 82288,
+      "length": 32
+    },
+    {
+      "name": "block.o.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 82320,
+      "length": 4096
+    },
+    {
+      "name": "block.o.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        32
+      ],
+      "offset": 86416,
+      "length": 4096
+    },
+    {
+      "name": "block.up.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        64
+      ],
+      "offset": 90512,
+      "length": 16384
+    },
+    {
+      "name": "block.up.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 106896,
+      "length": 32
+    },
+    {
+      "name": "block.up.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 106928,
+      "length": 4096
+    },
+    {
+      "name": "block.up.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        64
+      ],
+      "offset": 111024,
+      "length": 8192
+    },
+    {
+      "name": "block.gate.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        32,
+        64
+      ],
+      "offset": 119216,
+      "length": 16384
+    },
+    {
+      "name": "block.gate.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 135600,
+      "length": 32
+    },
+    {
+      "name": "block.gate.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        32,
+        8
+      ],
+      "offset": 135632,
+      "length": 4096
+    },
+    {
+      "name": "block.gate.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        64
+      ],
+      "offset": 139728,
+      "length": 8192
+    },
+    {
+      "name": "block.down.basis",
+      "dtype": "float32",
+      "shape": [
+        2,
+        64,
+        32
+      ],
+      "offset": 147920,
+      "length": 16384
+    },
+    {
+      "name": "block.down.coeff",
+      "dtype": "float32",
+      "shape": [
+        4,
+        2
+      ],
+      "offset": 164304,
+      "length": 32
+    },
+    {
+      "name": "block.down.u",
+      "dtype": "float32",
+      "shape": [
+        4,
+        64,
+        8
+      ],
+      "offset": 164336,
+      "length": 8192
+    },
+    {
+      "name": "block.down.v",
+      "dtype": "float32",
+      "shape": [
+        4,
+        8,
+        32
+      ],
+      "offset": 172528,
+      "length": 4096
+    },
+    {
+      "name": "block.state_cell.weight_ih",
+      "dtype": "float32",
+      "shape": [
+        48,
+        32
+      ],
+      "offset": 176624,
+      "length": 6144
+    },
+    {
+      "name": "block.state_cell.weight_hh",
+      "dtype": "float32",
+      "shape": [
+        48,
+        16
+      ],
+      "offset": 182768,
+      "length": 3072
+    },
+    {
+      "name": "block.state_cell.bias_ih",
+      "dtype": "float32",
+      "shape": [
+        48
+      ],
+      "offset": 185840,
+      "length": 192
+    },
+    {
+      "name": "block.state_cell.bias_hh",
+      "dtype": "float32",
+      "shape": [
+        48
+      ],
+      "offset": 186032,
+      "length": 192
+    },
+    {
+      "name": "block.state_proj.weight",
+      "dtype": "float32",
+      "shape": [
+        32,
+        16
+      ],
+      "offset": 186224,
+      "length": 2048
+    },
+    {
+      "name": "norm.weight",
+      "dtype": "float32",
+      "shape": [
+        32
+      ],
+      "offset": 188272,
+      "length": 128
+    },
+    {
+      "name": "lm_head.weight",
+      "dtype": "float32",
+      "shape": [
+        128,
+        32
+      ],
+      "offset": 188400,
+      "length": 16384
+    }
+  ],
+  "files": {
+    "checkpoint": "checkpoint.pt",
+    "config": "config.yaml",
+    "tokenizer": "tokenizer.json",
+    "metrics": "metrics.json",
+    "tensor_index": "tensor_index.json",
+    "tensors": "tensors.bin"
+  },
+  "tensor_payload": {
+    "index": "tensor_index.json",
+    "data": "tensors.bin",
+    "num_tensors": 40,
+    "total_bytes": 204784,
+    "sha256": "7c672242c7c3c3b8e3057ec6f64d17f8c6e38c47b2024c0318a450a83c793316"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "baseline_transformer_v0",
+  "train_loss_first": 20.772857666015625,
+  "train_loss": 3.5722668170928955,
+  "val_loss": 3.7206575870513916,
+  "loss_curve": [
+    {
+      "step": 10,
+      "train_loss": 8.704183578491211,
+      "val_loss": 8.070175528526306
+    },
+    {
+      "step": 20,
+      "train_loss": 4.81184720993042,
+      "val_loss": 4.5278812646865845
+    },
+    {
+      "step": 30,
+      "train_loss": 3.5722668170928955,
+      "val_loss": 3.7206575870513916
+    }
+  ],
+  "tokens_per_sec": 22480.455593769326,
+  "wall_clock_time_sec": 0.3416300869866973,
+  "sample_generation": "TinyCore s, BBBfosff uusseeI.} sstssllllt\t\t\teuss",
+  "stored_unique_params": 38176,
+  "stored_unique_bytes_fp32": 152704.0,
+  "stored_unique_bytes_bf16": 76352.0,
+  "stored_unique_bytes_quantized_estimate": 19088.0,
+  "effective_materialized_params": 38176,
+  "estimated_activation_bytes_fp32": 32768,
+  "estimated_kv_cache_bytes_fp32": 262144,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "baseline_transformer_v0",
+  "overrides": {}
+}

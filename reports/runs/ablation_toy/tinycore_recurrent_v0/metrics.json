@@ -1,0 +1,39 @@
+{
+  "name": "tinycore_recurrent_v0",
+  "train_loss_first": 18.92125129699707,
+  "train_loss": 3.5527966022491455,
+  "val_loss": 3.315534681081772,
+  "loss_curve": [
+    {
+      "step": 10,
+      "train_loss": 7.412393093109131,
+      "val_loss": 6.703380227088928
+    },
+    {
+      "step": 20,
+      "train_loss": 4.085496425628662,
+      "val_loss": 3.9675742089748383
+    },
+    {
+      "step": 30,
+      "train_loss": 3.5527966022491455,
+      "val_loss": 3.315534681081772
+    }
+  ],
+  "tokens_per_sec": 13815.903957356166,
+  "wall_clock_time_sec": 0.5558811080118176,
+  "sample_generation": "TinyCore s*ar+sr eep ep%s eh e empmue.emrt cews ",
+  "stored_unique_params": 35724,
+  "stored_unique_bytes_fp32": 142896.0,
+  "stored_unique_bytes_bf16": 71448.0,
+  "stored_unique_bytes_quantized_estimate": 17862.0,
+  "effective_materialized_params": 47444,
+  "estimated_activation_bytes_fp32": 32768,
+  "estimated_kv_cache_bytes_fp32": 262144,
+  "estimated_kv_cache_bytes_per_token_fp32": 8192,
+  "model_type": "tinycore_recurrent_v0",
+  "overrides": {
+    "low_rank": 4,
+    "recurrent_state_dim": 8
+  }
+}

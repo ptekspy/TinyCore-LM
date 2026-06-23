@@ -1,0 +1,609 @@
+{
+  "run_group": "instruction_code_capacity",
+  "run_id": "instruction_code_capacity",
+  "dataset": {
+    "name": "tinycore_instruction_code_compact_v0",
+    "source": "synthetic_builtin_text",
+    "license_notes": "Generated local toy corpus for architecture and instruction/code smoke tests.",
+    "num_documents": 1024,
+    "num_tokens": 44672,
+    "tokenizer": "byte_char_mvp",
+    "tokenizer_vocab_size": 128,
+    "repeat": 128,
+    "train_shards": [],
+    "val_shards": []
+  },
+  "config": {
+    "run_group": "instruction_code_capacity",
+    "seed": 1337,
+    "device": "cpu",
+    "dataset": {
+      "name": "tinycore_instruction_code_compact_v0",
+      "train_fraction": 0.9,
+      "repeat": 128
+    },
+    "model": {
+      "model_type": "tinycore_basis_v0",
+      "vocab_size": 128,
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 4,
+      "n_virtual_layers": 4,
+      "n_families": 1,
+      "basis_rank": 2,
+      "low_rank": 0,
+      "recurrent_state_dim": 8,
+      "mlp_ratio": 2,
+      "max_seq_len": 64,
+      "dropout": 0.0,
+      "rope": false,
+      "tie_embeddings": true,
+      "precision_target": "fp32"
+    },
+    "training": {
+      "batch_size": 8,
+      "seq_len": 48,
+      "max_steps": 500,
+      "eval_interval": 100,
+      "lr": 0.003,
+      "weight_decay": 0.01,
+      "grad_clip": 1.0
+    },
+    "generation": {
+      "prompt": "Q:add|A:",
+      "max_new_tokens": 48,
+      "temperature": 0.0
+    },
+    "eval": {
+      "enabled": true,
+      "suite_name": "instruction_code_compact_v0",
+      "max_new_tokens": 48,
+      "temperature": 0.0
+    },
+    "variants": [
+      {
+        "name": "baseline_transformer_v0",
+        "model_type": "baseline_transformer_v0",
+        "overrides": {}
+      },
+      {
+        "name": "tinycore_recurrent_lr4_state8",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "low_rank": 4,
+          "recurrent_state_dim": 8
+        }
+      },
+      {
+        "name": "tinycore_recurrent_lr8_state16",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "low_rank": 8,
+          "recurrent_state_dim": 16
+        }
+      },
+      {
+        "name": "tinycore_recurrent_basis4_lr8_state16",
+        "model_type": "tinycore_recurrent_v0",
+        "overrides": {
+          "basis_rank": 4,
+          "low_rank": 8,
+          "recurrent_state_dim": 16
+        }
+      }
+    ]
+  },
+  "models": [
+    {
+      "name": "baseline_transformer_v0",
+      "train_loss_first": 20.949954986572266,
+      "train_loss": 0.2054668515920639,
+      "val_loss": 0.1811184249818325,
+      "loss_curve": [
+        {
+          "step": 100,
+          "train_loss": 2.2437922954559326,
+          "val_loss": 2.1897559762001038
+        },
+        {
+          "step": 200,
+          "train_loss": 1.2485560178756714,
+          "val_loss": 1.123151808977127
+        },
+        {
+          "step": 300,
+          "train_loss": 0.5453627109527588,
+          "val_loss": 0.46231314539909363
+        },
+        {
+          "step": 400,
+          "train_loss": 0.3068966567516327,
+          "val_loss": 0.2568520326167345
+        },
+        {
+          "step": 500,
+          "train_loss": 0.2054668515920639,
+          "val_loss": 0.1811184249818325
+        }
+      ],
+      "tokens_per_sec": 54268.481505490374,
+      "wall_clock_time_sec": 3.537965217998135,
+      "sample_generation": "Q:add|A:def add(a,b):return a+b\n\nQ:rev|A:def rev(aetef!e",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_compact_v0",
+        "num_cases": 4,
+        "num_passed": 3,
+        "mean_score": 0.875,
+        "mean_reference_completion_loss": 0.19110856391489506,
+        "mean_reference_completion_ppl": 1.2105908393859863,
+        "cases": [
+          {
+            "name": "compact_add",
+            "prompt": "Q:add|A:",
+            "completion": "def add(a,b):return a+b\n\nQ:rev|A:def rev(aetef!e",
+            "expected_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "matched_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "reference_completion_loss": 0.07690328359603882,
+            "reference_completion_ppl": 1.0799375772476196,
+            "score": 1.0,
+            "passed": true
+          },
+          {
+            "name": "compact_reverse",
+            "prompt": "Q:rev|A:",
+            "completion": "def rev(s):return s[::::-1]\n\nQ:len|A:def b\u001emef c",
+            "expected_substrings": [
+              "def rev",
+              "[::-1]"
+            ],
+            "matched_substrings": [
+              "def rev"
+            ],
+            "reference_completion_loss": 0.10781537741422653,
+            "reference_completion_ppl": 1.1138421297073364,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_json",
+            "prompt": "Q:json|A:",
+            "completion": "{\"ok\":true,\"tokens\":[1,2,3]}\n\nQ:basis|A:basigsok",
+            "expected_substrings": [
+              "{\"ok\":true",
+              "tokens"
+            ],
+            "matched_substrings": [
+              "{\"ok\":true",
+              "tokens"
+            ],
+            "reference_completion_loss": 0.04760359227657318,
+            "reference_completion_ppl": 1.0487548112869263,
+            "score": 1.0,
+            "passed": true
+          },
+          {
+            "name": "compact_basis",
+            "prompt": "Q:basis|A:",
+            "completion": "reuse basisis weights across virtual lai\n\n\n\n\nQ:b",
+            "expected_substrings": [
+              "reuse",
+              "basis"
+            ],
+            "matched_substrings": [
+              "reuse",
+              "basis"
+            ],
+            "reference_completion_loss": 0.5321120023727417,
+            "reference_completion_ppl": 1.7025243043899536,
+            "score": 1.0,
+            "passed": true
+          }
+        ]
+      },
+      "stored_unique_params": 39200,
+      "stored_unique_bytes_fp32": 156800.0,
+      "stored_unique_bytes_bf16": 78400.0,
+      "stored_unique_bytes_quantized_estimate": 19600.0,
+      "effective_materialized_params": 39200,
+      "estimated_activation_bytes_fp32": 49152,
+      "estimated_kv_cache_bytes_fp32": 393216,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "baseline_transformer_v0",
+      "overrides": {},
+      "run_id": "instruction_code_capacity_baseline_transformer_v0",
+      "artifact_dir": "reports/runs/instruction_code_capacity/baseline_transformer_v0",
+      "manifest": "reports/runs/instruction_code_capacity/baseline_transformer_v0/manifest.json",
+      "checkpoint": "reports/runs/instruction_code_capacity/baseline_transformer_v0/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.0,
+      "instruction_eval_score_per_100kib_bf16": 1.1428571428571428
+    },
+    {
+      "name": "tinycore_recurrent_lr4_state8",
+      "train_loss_first": 18.48579978942871,
+      "train_loss": 0.36005035042762756,
+      "val_loss": 0.4273087829351425,
+      "loss_curve": [
+        {
+          "step": 100,
+          "train_loss": 2.31189227104187,
+          "val_loss": 2.384931117296219
+        },
+        {
+          "step": 200,
+          "train_loss": 1.8663629293441772,
+          "val_loss": 1.6148023754358292
+        },
+        {
+          "step": 300,
+          "train_loss": 1.0786457061767578,
+          "val_loss": 1.0699077993631363
+        },
+        {
+          "step": 400,
+          "train_loss": 0.6738123297691345,
+          "val_loss": 0.6523700430989265
+        },
+        {
+          "step": 500,
+          "train_loss": 0.36005035042762756,
+          "val_loss": 0.4273087829351425
+        }
+      ],
+      "tokens_per_sec": 25414.067446484103,
+      "wall_clock_time_sec": 7.554870955005754,
+      "sample_generation": "Q:add|A:def adddddd(a,b):returevn a+b\n\nQ:rev|A:dev(ref s",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_compact_v0",
+        "num_cases": 4,
+        "num_passed": 0,
+        "mean_score": 0.25,
+        "mean_reference_completion_loss": 0.2796737998723984,
+        "mean_reference_completion_ppl": 1.3226982355117798,
+        "cases": [
+          {
+            "name": "compact_add",
+            "prompt": "Q:add|A:",
+            "completion": "def adddddd(a,b):returevn a+b\n\nQ:rev|A:dev(ref s",
+            "expected_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "matched_substrings": [
+              "def add"
+            ],
+            "reference_completion_loss": 0.28459927439689636,
+            "reference_completion_ppl": 1.3292292356491089,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_reverse",
+            "prompt": "Q:rev|A:",
+            "completion": "dev(s):return rn s[::-1]\nQ:len|A:def coundevef c",
+            "expected_substrings": [
+              "def rev",
+              "[::-1]"
+            ],
+            "matched_substrings": [
+              "[::-1]"
+            ],
+            "reference_completion_loss": 0.21364109218120575,
+            "reference_completion_ppl": 1.2381781339645386,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_json",
+            "prompt": "Q:json|A:",
+            "completion": "def ad(a,b):revn rev(a+b\n\nQ:rev|A:def revvvvurs ",
+            "expected_substrings": [
+              "{\"ok\":true",
+              "tokens"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 0.13182054460048676,
+            "reference_completion_ppl": 1.1409035921096802,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "compact_basis",
+            "prompt": "Q:basis|A:",
+            "completion": "dddef add(a,b):retureturn a+b\n\nQ:rev|A:def refA:",
+            "expected_substrings": [
+              "reuse",
+              "basis"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 0.48863428831100464,
+            "reference_completion_ppl": 1.630088448524475,
+            "score": 0.0,
+            "passed": false
+          }
+        ]
+      },
+      "stored_unique_params": 36748,
+      "stored_unique_bytes_fp32": 146992.0,
+      "stored_unique_bytes_bf16": 73496.0,
+      "stored_unique_bytes_quantized_estimate": 18374.0,
+      "effective_materialized_params": 48468,
+      "estimated_activation_bytes_fp32": 49152,
+      "estimated_kv_cache_bytes_fp32": 393216,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_recurrent_v0",
+      "overrides": {
+        "low_rank": 4,
+        "recurrent_state_dim": 8
+      },
+      "run_id": "instruction_code_capacity_tinycore_recurrent_lr4_state8",
+      "artifact_dir": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr4_state8",
+      "manifest": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr4_state8/manifest.json",
+      "checkpoint": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr4_state8/checkpoint.pt",
+      "compression_ratio_vs_baseline": 1.0667247197126375,
+      "instruction_eval_score_per_100kib_bf16": 0.3483182758245347
+    },
+    {
+      "name": "tinycore_recurrent_lr8_state16",
+      "train_loss_first": 19.513277053833008,
+      "train_loss": 0.43035006523132324,
+      "val_loss": 0.38228001445531845,
+      "loss_curve": [
+        {
+          "step": 100,
+          "train_loss": 2.463338851928711,
+          "val_loss": 2.5071164965629578
+        },
+        {
+          "step": 200,
+          "train_loss": 1.7613722085952759,
+          "val_loss": 1.609042540192604
+        },
+        {
+          "step": 300,
+          "train_loss": 1.2529491186141968,
+          "val_loss": 1.1059686914086342
+        },
+        {
+          "step": 400,
+          "train_loss": 0.6218123435974121,
+          "val_loss": 0.6336381062865257
+        },
+        {
+          "step": 500,
+          "train_loss": 0.43035006523132324,
+          "val_loss": 0.38228001445531845
+        }
+      ],
+      "tokens_per_sec": 26918.04613438741,
+      "wall_clock_time_sec": 7.132761383996694,
+      "sample_generation": "Q:add|A:def def ad(a,b):return a+b\n\n\nQ:rev|A:dev|A:dev(s",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_compact_v0",
+        "num_cases": 4,
+        "num_passed": 1,
+        "mean_score": 0.5,
+        "mean_reference_completion_loss": 0.2547821141779423,
+        "mean_reference_completion_ppl": 1.2901804447174072,
+        "cases": [
+          {
+            "name": "compact_add",
+            "prompt": "Q:add|A:",
+            "completion": "def def ad(a,b):return a+b\n\n\nQ:rev|A:dev|A:dev(s",
+            "expected_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "matched_substrings": [
+              "return a+b"
+            ],
+            "reference_completion_loss": 0.16367481648921967,
+            "reference_completion_ppl": 1.1778312921524048,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_reverse",
+            "prompt": "Q:rev|A:",
+            "completion": "def rev(s):return s[::-1]\n\nQ:len|A:def conssefue",
+            "expected_substrings": [
+              "def rev",
+              "[::-1]"
+            ],
+            "matched_substrings": [
+              "def rev",
+              "[::-1]"
+            ],
+            "reference_completion_loss": 0.12372376024723053,
+            "reference_completion_ppl": 1.13170325756073,
+            "score": 1.0,
+            "passed": true
+          },
+          {
+            "name": "compact_json",
+            "prompt": "Q:json|A:",
+            "completion": "{\":tre,\"tokenstokens\nQ:byten|A:r bavis to3]arnst",
+            "expected_substrings": [
+              "{\"ok\":true",
+              "tokens"
+            ],
+            "matched_substrings": [
+              "tokens"
+            ],
+            "reference_completion_loss": 0.21992351114749908,
+            "reference_completion_ppl": 1.2459814548492432,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_basis",
+            "prompt": "Q:basis|A:",
+            "completion": "re s weihts acrosss virtual l l lal lart\nQ:trtus",
+            "expected_substrings": [
+              "reuse",
+              "basis"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 0.5118063688278198,
+            "reference_completion_ppl": 1.668302059173584,
+            "score": 0.0,
+            "passed": false
+          }
+        ]
+      },
+      "stored_unique_params": 47100,
+      "stored_unique_bytes_fp32": 188400.0,
+      "stored_unique_bytes_bf16": 94200.0,
+      "stored_unique_bytes_quantized_estimate": 23550.0,
+      "effective_materialized_params": 50116,
+      "estimated_activation_bytes_fp32": 49152,
+      "estimated_kv_cache_bytes_fp32": 393216,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_recurrent_v0",
+      "overrides": {
+        "low_rank": 8,
+        "recurrent_state_dim": 16
+      },
+      "run_id": "instruction_code_capacity_tinycore_recurrent_lr8_state16",
+      "artifact_dir": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr8_state16",
+      "manifest": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr8_state16/manifest.json",
+      "checkpoint": "reports/runs/instruction_code_capacity/tinycore_recurrent_lr8_state16/checkpoint.pt",
+      "compression_ratio_vs_baseline": 0.832271762208068,
+      "instruction_eval_score_per_100kib_bf16": 0.5435244161358811
+    },
+    {
+      "name": "tinycore_recurrent_basis4_lr8_state16",
+      "train_loss_first": 20.46744155883789,
+      "train_loss": 0.4507165849208832,
+      "val_loss": 0.4275890327990055,
+      "loss_curve": [
+        {
+          "step": 100,
+          "train_loss": 2.517585515975952,
+          "val_loss": 2.50799497961998
+        },
+        {
+          "step": 200,
+          "train_loss": 1.5931806564331055,
+          "val_loss": 1.673893466591835
+        },
+        {
+          "step": 300,
+          "train_loss": 1.2765377759933472,
+          "val_loss": 1.114067405462265
+        },
+        {
+          "step": 400,
+          "train_loss": 0.8259255290031433,
+          "val_loss": 0.6856153979897499
+        },
+        {
+          "step": 500,
+          "train_loss": 0.4507165849208832,
+          "val_loss": 0.4275890327990055
+        }
+      ],
+      "tokens_per_sec": 26923.450628885937,
+      "wall_clock_time_sec": 7.131329584997729,
+      "sample_generation": "Q:add|A:def adda,b):return a+b\n\nQ:rev|A:defef reff):def ",
+      "instruction_code_eval": {
+        "suite_name": "instruction_code_compact_v0",
+        "num_cases": 4,
+        "num_passed": 1,
+        "mean_score": 0.375,
+        "mean_reference_completion_loss": 0.29260894283652306,
+        "mean_reference_completion_ppl": 1.3399187326431274,
+        "cases": [
+          {
+            "name": "compact_add",
+            "prompt": "Q:add|A:",
+            "completion": "def adda,b):return a+b\n\nQ:rev|A:defef reff):def ",
+            "expected_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "matched_substrings": [
+              "def add",
+              "return a+b"
+            ],
+            "reference_completion_loss": 0.14047347009181976,
+            "reference_completion_ppl": 1.1508185863494873,
+            "score": 1.0,
+            "passed": true
+          },
+          {
+            "name": "compact_reverse",
+            "prompt": "Q:rev|A:",
+            "completion": "def rev(s):return s[::-1\n\nQ:len|A:def count(ef r",
+            "expected_substrings": [
+              "def rev",
+              "[::-1]"
+            ],
+            "matched_substrings": [
+              "def rev"
+            ],
+            "reference_completion_loss": 0.1314454972743988,
+            "reference_completion_ppl": 1.1404757499694824,
+            "score": 0.5,
+            "passed": false
+          },
+          {
+            "name": "compact_json",
+            "prompt": "Q:json|A:",
+            "completion": "savavad refig counfize toicl tr aing checed cker",
+            "expected_substrings": [
+              "{\"ok\":true",
+              "tokens"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 0.19336697459220886,
+            "reference_completion_ppl": 1.2133280038833618,
+            "score": 0.0,
+            "passed": false
+          },
+          {
+            "name": "compact_basis",
+            "prompt": "Q:basis|A:",
+            "completion": "dddddd(ad(a,b):re aQ:rn a+b\n\nQ:rev|A:def ref ren",
+            "expected_substrings": [
+              "reuse",
+              "basis"
+            ],
+            "matched_substrings": [],
+            "reference_completion_loss": 0.7051498293876648,
+            "reference_completion_ppl": 2.0241498947143555,
+            "score": 0.0,
+            "passed": false
+          }
+        ]
+      },
+      "stored_unique_params": 67636,
+      "stored_unique_bytes_fp32": 270544.0,
+      "stored_unique_bytes_bf16": 135272.0,
+      "stored_unique_bytes_quantized_estimate": 33818.0,
+      "effective_materialized_params": 50116,
+      "estimated_activation_bytes_fp32": 49152,
+      "estimated_kv_cache_bytes_fp32": 393216,
+      "estimated_kv_cache_bytes_per_token_fp32": 8192,
+      "model_type": "tinycore_recurrent_v0",
+      "overrides": {
+        "basis_rank": 4,
+        "low_rank": 8,
+        "recurrent_state_dim": 16
+      },
+      "run_id": "instruction_code_capacity_tinycore_recurrent_basis4_lr8_state16",
+      "artifact_dir": "reports/runs/instruction_code_capacity/tinycore_recurrent_basis4_lr8_state16",
+      "manifest": "reports/runs/instruction_code_capacity/tinycore_recurrent_basis4_lr8_state16/manifest.json",
+      "checkpoint": "reports/runs/instruction_code_capacity/tinycore_recurrent_basis4_lr8_state16/checkpoint.pt",
+      "compression_ratio_vs_baseline": 0.5795730084570347,
+      "instruction_eval_score_per_100kib_bf16": 0.28387249393813946
+    }
+  ],
+  "conclusion": "compressed_smaller_but_quality_worse",
+  "next_experiment": "Add low-rank TinyCore and run an ablation."
+}
