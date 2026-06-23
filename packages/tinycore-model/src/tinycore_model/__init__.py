@@ -4,6 +4,7 @@ from .benchmark import run_benchmark
 from .config import BenchmarkConfig, DatasetConfig, EvalConfig, ModelConfig, ModelVariant, TrainingConfig, load_benchmark_config
 from .instruction_eval import run_instruction_eval
 from .models import ComposedLinear, SharedTransformerLM, TinyCoreLM, TransformerLM
+from .tool_eval import parse_tool_call, run_tool_eval
 
 __all__ = [
     "BenchmarkConfig",
@@ -21,5 +22,7 @@ __all__ = [
     "parameter_report",
     "run_benchmark",
     "run_instruction_eval",
+    "run_tool_eval",
+    "parse_tool_call",
     "save_model_artifact",
 ]

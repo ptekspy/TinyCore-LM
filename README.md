@@ -22,6 +22,8 @@ python3 benchmarks/run_instruction_code_benchmark.py --config configs/typescript
 python3 tools/ingest_function_calling_stage3.py --output-dir data/training/function_calling_stage3_v0 --dry-run
 python3 tools/ingest_function_calling_stage3.py --output-dir data/training/function_calling_stage3_v0 --val-fraction 0.02 --max-record-chars 24000
 python3 benchmarks/run_instruction_code_benchmark.py --config configs/function_calling_stage3_5090_tinycore.yaml --output reports/runs/function_calling_stage3_5090_report.json
+python3 benchmarks/run_stage_3_tool_eval.py --artifact-dir reports/runs/instruction_code_permuted_tinycore/tinycore_recurrent_lr4_state8 --output reports/runs/stage_3_tool_eval_after_stage2_report.json
+python3 benchmarks/run_stage_3_tool_eval.py --artifact-dir reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0 --output reports/runs/stage_3_tool_eval_after_stage3_report.json
 npm install
 npm test
 node packages/tinycore-agent/dist/src/agent_benchmark_cli.js --output reports/runs/agent_eval_report.json
@@ -85,6 +87,10 @@ and `MCPToolBench/MCPToolBenchPP` into function-calling/tool-use JSONL, then
 trains `configs/function_calling_stage3_5090_tinycore.yaml`. Follow
 `tasks/phase_3_function_calling_training_runbook.md`; the paste-ready 5090
 agent prompt is `prompts/codex_stage3_function_calling_operator.md`.
+The stage-3 tool-call eval lives in `benchmarks/run_stage_3_tool_eval.py`.
+Run it before stage 3 against the current compact TinyCore artifact, then run it
+again after stage 3 against the function-calling artifact. Details are in
+`tasks/phase_3_tool_eval.md`.
 The selected long-run TinyCore artifacts can be exported to `.tcmdl`; the native
 generator matches the Python runtime on compact instruction/code prompts.
 

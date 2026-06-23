@@ -69,7 +69,8 @@
     "RTX 5090 TypeScript GitHub second-pass training config and operator runbook",
     "Hugging Face function-calling and MCP tool-use stage-3 ingestion pipeline",
     "Function-calling stage-3 holdout eval suite",
-    "RTX 5090 function-calling stage-3 training config and operator runbook"
+    "RTX 5090 function-calling stage-3 training config and operator runbook",
+    "stage-3 tool-call eval harness with before/after reports"
   ],
   "latest_benchmark": {
     "report": "reports/runs/instruction_code_permuted_tinycore_report.json",
@@ -129,13 +130,18 @@
     "data/training/function_calling_stage3_v0/README.md",
     "tools/ingest_function_calling_stage3.py",
     "configs/function_calling_stage3_5090_tinycore.yaml",
-    "tasks/phase_3_function_calling_training_runbook.md"
+    "tasks/phase_3_function_calling_training_runbook.md",
+    "benchmarks/run_stage_3_tool_eval.py",
+    "tasks/phase_3_tool_eval.md",
+    "reports/runs/stage_3_tool_eval_after_stage2_report.json"
   ],
   "next_recommended_work": [
+    "Run reports/runs/stage_3_tool_eval_after_stage2_report.json as the pre-stage-3 tool-call baseline.",
     "Accept Salesforce/xlam-function-calling-60k terms on Hugging Face, set HF_TOKEN, and run the stage-3 dry run from tasks/phase_3_function_calling_training_runbook.md.",
     "Run full ingestion into data/training/function_calling_stage3_v0 and audit rows_by_dataset plus skipped secret-like rows.",
     "Run the smoke and full configs/function_calling_stage3_5090_tinycore.yaml training jobs on the RTX 5090 laptop.",
-    "Export and verify reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0.tcmdl."
+    "Export and verify reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0.tcmdl.",
+    "Run reports/runs/stage_3_tool_eval_after_stage3_report.json and turn failures into stage 3.5 corrective examples."
   ],
   "architecture_formula": "W_eff[layer, kind] = sum_i alpha[layer, kind, i] * Basis[kind, i] + U[layer, kind] @ V[layer, kind]",
   "success_metric": "quality per stored unique byte against baseline",

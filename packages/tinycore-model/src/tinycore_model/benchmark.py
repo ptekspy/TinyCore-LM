@@ -334,6 +334,8 @@ def _write_progress(report: dict[str, Any]) -> None:
         "tasks/phase_3_function_calling_training_runbook.md"
     ).exists():
         completed.append("implementation_step_63_function_calling_stage3_5090_pass")
+    if Path("benchmarks/run_stage_3_tool_eval.py").exists():
+        completed.append("implementation_step_64_stage_3_tool_call_eval")
     progress = {
         "completed_tasks": completed,
         "blocked_tasks": [],
