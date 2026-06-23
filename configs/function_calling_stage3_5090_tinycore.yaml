@@ -1,0 +1,50 @@
+run_group: function_calling_stage3_5090_tinycore
+seed: 1337
+device: cuda
+dataset:
+  name: function_calling_stage3_v0
+  train_fraction: 0.98
+  repeat: 1
+model:
+  model_type: tinycore_recurrent_v0
+  vocab_size: 128
+  d_model: 512
+  n_heads: 8
+  n_layers: 10
+  n_virtual_layers: 16
+  n_families: 1
+  basis_rank: 8
+  low_rank: 0
+  recurrent_state_dim: 96
+  mlp_ratio: 4
+  max_seq_len: 768
+  dropout: 0.0
+  rope: false
+  tie_embeddings: true
+  precision_target: bf16
+variants:
+  - name: baseline_transformer_function_calling_v0
+    model_type: baseline_transformer_v0
+  - name: tinycore_recurrent_function_calling_v0
+    model_type: tinycore_recurrent_v0
+    overrides:
+      low_rank: 24
+      recurrent_state_dim: 96
+training:
+  batch_size: 16
+  seq_len: 768
+  max_steps: 40000
+  eval_interval: 2000
+  lr: 0.00045
+  weight_decay: 0.01
+  grad_clip: 1.0
+  select_best_eval_checkpoint: true
+generation:
+  prompt: "Q:function call weather|A:"
+  max_new_tokens: 160
+  temperature: 0.0
+eval:
+  enabled: true
+  suite_name: function_calling_stage3_holdout_v0
+  max_new_tokens: 160
+  temperature: 0.0

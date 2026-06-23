@@ -89,3 +89,26 @@ def test_typescript_github_corpus_loads_when_ingested() -> None:
     assert val_tokens.numel() > 0
     assert manifest["name"] == "typescript_github_top100_v0"
     assert manifest["train_shards"]
+
+
+def test_function_calling_stage3_corpus_loads_when_ingested() -> None:
+    corpus_dir = Path("data/training/function_calling_stage3_v0")
+    if not (corpus_dir / "train.jsonl").exists():
+        pytest.skip("Function-calling stage 3 corpus has not been ingested yet")
+
+    train_tokens, val_tokens, tokenizer = make_token_splits(
+        corpus_name="function_calling_stage3_v0",
+        repeat=1,
+    )
+    manifest = dataset_manifest(
+        train_tokens,
+        val_tokens,
+        tokenizer,
+        corpus_name="function_calling_stage3_v0",
+        repeat=1,
+    )
+
+    assert train_tokens.numel() > 0
+    assert val_tokens.numel() > 0
+    assert manifest["name"] == "function_calling_stage3_v0"
+    assert manifest["train_shards"]

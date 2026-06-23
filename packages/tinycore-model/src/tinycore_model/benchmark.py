@@ -328,6 +328,12 @@ def _write_progress(report: dict[str, Any]) -> None:
         completed.append("implementation_step_60_typescript_github_5090_pass")
     if Path("data/training/typescript_github_top100_v0/README.md").exists():
         completed.append("implementation_step_61_docs_site_ingestion_for_install_usage")
+    if Path("tools/ingest_function_calling_stage3.py").exists():
+        completed.append("implementation_step_62_function_calling_stage3_ingestion")
+    if Path("configs/function_calling_stage3_5090_tinycore.yaml").exists() and Path(
+        "tasks/phase_3_function_calling_training_runbook.md"
+    ).exists():
+        completed.append("implementation_step_63_function_calling_stage3_5090_pass")
     progress = {
         "completed_tasks": completed,
         "blocked_tasks": [],

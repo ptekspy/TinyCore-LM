@@ -85,3 +85,15 @@ def test_loads_typescript_github_5090_training_config() -> None:
     assert cfg.training.batch_size == 32
     assert cfg.training.max_steps == 30000
     assert cfg.eval.suite_name == "typescript_github_holdout_v0"
+
+
+def test_loads_function_calling_stage3_5090_training_config() -> None:
+    cfg = load_benchmark_config("configs/function_calling_stage3_5090_tinycore.yaml")
+    assert cfg.device == "cuda"
+    assert cfg.dataset.name == "function_calling_stage3_v0"
+    assert cfg.dataset.repeat == 1
+    assert cfg.model.max_seq_len == 768
+    assert cfg.model.d_model == 512
+    assert cfg.training.batch_size == 16
+    assert cfg.training.max_steps == 40000
+    assert cfg.eval.suite_name == "function_calling_stage3_holdout_v0"

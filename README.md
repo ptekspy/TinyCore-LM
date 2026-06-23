@@ -19,6 +19,9 @@ python3 benchmarks/run_instruction_code_benchmark.py --config configs/instructio
 python3 tools/ingest_github_typescript_repos.py --output-dir data/training/typescript_github_top100_v0 --top-n 100 --candidate-pool 200 --dry-run
 python3 tools/ingest_github_typescript_repos.py --output-dir data/training/typescript_github_top100_v0 --top-n 100 --candidate-pool 200 --max-doc-pages-per-repo 40 --max-doc-bytes 300000
 python3 benchmarks/run_instruction_code_benchmark.py --config configs/typescript_github_5090_tinycore.yaml --output reports/runs/typescript_github_5090_report.json
+python3 tools/ingest_function_calling_stage3.py --output-dir data/training/function_calling_stage3_v0 --dry-run
+python3 tools/ingest_function_calling_stage3.py --output-dir data/training/function_calling_stage3_v0 --val-fraction 0.02 --max-record-chars 24000
+python3 benchmarks/run_instruction_code_benchmark.py --config configs/function_calling_stage3_5090_tinycore.yaml --output reports/runs/function_calling_stage3_5090_report.json
 npm install
 npm test
 node packages/tinycore-agent/dist/src/agent_benchmark_cli.js --output reports/runs/agent_eval_report.json
@@ -76,6 +79,12 @@ allowlisted permissive-license source plus discovered docs-site pages for
 install, quickstart, usage, and API commands, then train
 `configs/typescript_github_5090_tinycore.yaml`. Follow
 `tasks/phase_2_github_typescript_ingestion_runbook.md`.
+The third 5090 pass uses `tools/ingest_function_calling_stage3.py` to ingest
+`Salesforce/xlam-function-calling-60k`, `glaiveai/glaive-function-calling-v2`,
+and `MCPToolBench/MCPToolBenchPP` into function-calling/tool-use JSONL, then
+trains `configs/function_calling_stage3_5090_tinycore.yaml`. Follow
+`tasks/phase_3_function_calling_training_runbook.md`; the paste-ready 5090
+agent prompt is `prompts/codex_stage3_function_calling_operator.md`.
 The selected long-run TinyCore artifacts can be exported to `.tcmdl`; the native
 generator matches the Python runtime on compact instruction/code prompts.
 

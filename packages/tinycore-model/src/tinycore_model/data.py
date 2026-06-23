@@ -89,6 +89,7 @@ CORPORA = {
 FILE_CORPORA = {
     "tinycore_instruction_code_5090_v0": REPO_ROOT / "data" / "training" / "instruction_code_5090_v0",
     "typescript_github_top100_v0": REPO_ROOT / "data" / "training" / "typescript_github_top100_v0",
+    "function_calling_stage3_v0": REPO_ROOT / "data" / "training" / "function_calling_stage3_v0",
 }
 
 

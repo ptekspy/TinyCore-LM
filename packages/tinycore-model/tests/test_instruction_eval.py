@@ -57,6 +57,19 @@ class EchoGithubAnswer(EchoUsefulAnswer):
         return torch.cat([tokens, suffix], dim=1)
 
 
+class EchoFunctionCallingAnswer(EchoUsefulAnswer):
+    def generate(self, tokens: torch.Tensor, max_new_tokens: int, temperature: float = 0.0) -> torch.Tensor:
+        del max_new_tokens, temperature
+        answer = (
+            '<functioncall> {"name":"get_weather","arguments":{"location":"London"}}\n'
+            "Use the provided tool name and required JSON arguments; do not invent unavailable tools.\n"
+            "Choose the MCP server tool whose input_schema matches the task, then emit valid arguments.\n"
+            "After a function response, summarize without fabricating extra tool output.\n"
+        )
+        suffix = torch.tensor([self.tokenizer.encode(answer)], dtype=torch.long, device=tokens.device)
+        return torch.cat([tokens, suffix], dim=1)
+
+
 def test_instruction_eval_scores_expected_substrings() -> None:
     tokenizer = ByteTokenizer()
     result = run_instruction_eval(
@@ -103,6 +116,23 @@ def test_typescript_github_holdout_eval_scores_expected_substrings() -> None:
     )
 
     assert result["suite_name"] == "typescript_github_holdout_v0"
+    assert result["num_cases"] == 4
+    assert result["num_passed"] == 4
+    assert result["mean_score"] == 1.0
+
+
+def test_function_calling_stage3_holdout_eval_scores_expected_substrings() -> None:
+    tokenizer = ByteTokenizer()
+    result = run_instruction_eval(
+        EchoFunctionCallingAnswer(tokenizer),
+        tokenizer,
+        torch.device("cpu"),
+        suite_name="function_calling_stage3_holdout_v0",
+        max_new_tokens=96,
+        temperature=0.0,
+    )
+
+    assert result["suite_name"] == "function_calling_stage3_holdout_v0"
     assert result["num_cases"] == 4
     assert result["num_passed"] == 4
     assert result["mean_score"] == 1.0

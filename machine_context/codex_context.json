@@ -66,7 +66,10 @@
     "RTX 5090 TinyCore training config and operator runbook",
     "GitHub TypeScript top-100 repository and docs-site ingestion pipeline",
     "TypeScript GitHub holdout eval suite",
-    "RTX 5090 TypeScript GitHub second-pass training config and operator runbook"
+    "RTX 5090 TypeScript GitHub second-pass training config and operator runbook",
+    "Hugging Face function-calling and MCP tool-use stage-3 ingestion pipeline",
+    "Function-calling stage-3 holdout eval suite",
+    "RTX 5090 function-calling stage-3 training config and operator runbook"
   ],
   "latest_benchmark": {
     "report": "reports/runs/instruction_code_permuted_tinycore_report.json",
@@ -122,13 +125,17 @@
     "data/training/typescript_github_top100_v0/README.md",
     "tools/ingest_github_typescript_repos.py",
     "configs/typescript_github_5090_tinycore.yaml",
-    "tasks/phase_2_github_typescript_ingestion_runbook.md"
+    "tasks/phase_2_github_typescript_ingestion_runbook.md",
+    "data/training/function_calling_stage3_v0/README.md",
+    "tools/ingest_function_calling_stage3.py",
+    "configs/function_calling_stage3_5090_tinycore.yaml",
+    "tasks/phase_3_function_calling_training_runbook.md"
   ],
   "next_recommended_work": [
-    "Run the GitHub TypeScript discovery dry run from tasks/phase_2_github_typescript_ingestion_runbook.md on the RTX 5090 laptop with GITHUB_TOKEN set.",
-    "Run full ingestion into data/training/typescript_github_top100_v0 and audit selected/skipped repos plus docs-site coverage by license, size, secrets, robots, and crawl policy.",
-    "Run the smoke and full configs/typescript_github_5090_tinycore.yaml training jobs on the RTX 5090 laptop.",
-    "Export and verify reports/runs/typescript_github_5090_tinycore/tinycore_recurrent_ts_github_v0.tcmdl."
+    "Accept Salesforce/xlam-function-calling-60k terms on Hugging Face, set HF_TOKEN, and run the stage-3 dry run from tasks/phase_3_function_calling_training_runbook.md.",
+    "Run full ingestion into data/training/function_calling_stage3_v0 and audit rows_by_dataset plus skipped secret-like rows.",
+    "Run the smoke and full configs/function_calling_stage3_5090_tinycore.yaml training jobs on the RTX 5090 laptop.",
+    "Export and verify reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0.tcmdl."
   ],
   "architecture_formula": "W_eff[layer, kind] = sum_i alpha[layer, kind, i] * Basis[kind, i] + U[layer, kind] @ V[layer, kind]",
   "success_metric": "quality per stored unique byte against baseline",
