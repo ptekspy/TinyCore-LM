@@ -1,4 +1,6 @@
 import { spawn } from 'node:child_process';
+import path from 'node:path';
+import process from 'node:process';
 import type { GenerateRequest, GenerateResponse, ModelRuntime } from './pythonRuntime.js';
 
 export type NativeModelRuntimeOptions = {
@@ -46,7 +48,11 @@ export class NativeModelRuntime implements ModelRuntime {
 
 function runNativeJsonProcess(command: string, args: string[], timeoutMs: number): Promise<NativeGenerateResponse> {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    const extension = path.extname(command);
+    const child =
+      extension === '.js' || extension === '.mjs'
+        ? spawn(process.execPath, [command, ...args], { stdio: ['ignore', 'pipe', 'pipe'] })
+        : spawn(command, args, { stdio: ['ignore', 'pipe', 'pipe'] });
     const timer = setTimeout(() => {
       child.kill('SIGTERM');
       reject(new Error(`native model runtime timed out after ${timeoutMs}ms`));

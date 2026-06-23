@@ -2,10 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import warnings
 
-os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
 warnings.filterwarnings("ignore", message="CUDA initialization:.*")
 
 from tinycore_model import load_benchmark_config, run_benchmark
