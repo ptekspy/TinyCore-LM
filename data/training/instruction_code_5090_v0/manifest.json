@@ -1,0 +1,17 @@
+{
+  "name": "tinycore_instruction_code_5090_v0",
+  "source": "deterministic_local_generator",
+  "generator": "tools/generate_large_instruction_corpus.py",
+  "license_notes": "Synthetic local examples generated from repository-owned templates; no scraped or third-party text.",
+  "train_examples": 60000,
+  "val_examples": 6000,
+  "num_documents": 66000,
+  "eval_holdout_examples": 8,
+  "seed": 1337,
+  "format": "jsonl with id, split, category, prompt, response, text",
+  "sha256": {
+    "train": "5b2d7ae1d2229ab7075ada15cd34b9b87fa627fa04949fbc817ec7b9e7758c25",
+    "val": "a28720c562fb995d1e5ab19854b0591379f6dc7c6150b650bde1829a3bac23b6",
+    "eval_holdout": "90acac5e1ab4e61c55d535d678296ab96414ba9e6dac358e04ec6c7efd0149f4"
+  }
+}
