@@ -132,11 +132,39 @@ TYPESCRIPT_GITHUB_HOLDOUT_CASES = [
     ),
 ]
 
+FUNCTION_CALLING_STAGE3_CASES = [
+    InstructionEvalCase(
+        name="function_weather_call",
+        prompt="Q:function call weather|A:",
+        reference_completion='<functioncall> {"name":"get_weather","arguments":{"location":"London"}}\n',
+        expected_substrings=("<functioncall>", "get_weather", "location"),
+    ),
+    InstructionEvalCase(
+        name="tool_schema_rule",
+        prompt="Q:tool schema rule|A:",
+        reference_completion="Use the provided tool name and required JSON arguments; do not invent unavailable tools.\n",
+        expected_substrings=("required JSON arguments", "do not invent"),
+    ),
+    InstructionEvalCase(
+        name="mcp_tool_call_rule",
+        prompt="Q:mcp tool call|A:",
+        reference_completion="Choose the MCP server tool whose input_schema matches the task, then emit valid arguments.\n",
+        expected_substrings=("MCP server tool", "input_schema", "arguments"),
+    ),
+    InstructionEvalCase(
+        name="function_response_rule",
+        prompt="Q:function response|A:",
+        reference_completion="After a function response, summarize the result for the user without fabricating extra tool output.\n",
+        expected_substrings=("function response", "without fabricating"),
+    ),
+]
+
 EVAL_SUITES = {
     "instruction_code_smoke_v0": INSTRUCTION_CODE_SMOKE_CASES,
     "instruction_code_compact_v0": COMPACT_INSTRUCTION_CODE_CASES,
     "instruction_code_5090_holdout_v0": INSTRUCTION_CODE_5090_HOLDOUT_CASES,
     "typescript_github_holdout_v0": TYPESCRIPT_GITHUB_HOLDOUT_CASES,
+    "function_calling_stage3_holdout_v0": FUNCTION_CALLING_STAGE3_CASES,
 }
 
 

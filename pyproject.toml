@@ -21,6 +21,10 @@ tinycore-format = "tinycore_format.cli:main"
 dev = [
   "pytest>=8.0",
 ]
+hf = [
+  "datasets>=2.19",
+  "huggingface-hub>=0.23",
+]
 
 [tool.setuptools.packages.find]
 where = ["packages/tinycore-model/src", "packages/tinycore-format/src"]
