@@ -197,6 +197,18 @@ Stop and ask for guidance if:
 
 ## Step 4: Smoke Training Run
 
+Before starting stage-3 training, capture the current pre-stage-3 tool-call
+baseline:
+
+```bash
+python3 benchmarks/run_stage_3_tool_eval.py \
+  --artifact-dir reports/runs/instruction_code_permuted_tinycore/tinycore_recurrent_lr4_state8 \
+  --output reports/runs/stage_3_tool_eval_after_stage2_report.json
+```
+
+This report is expected to be weak. It exists so the post-stage-3 run has a
+baseline to beat.
+
 Run:
 
 ```bash
@@ -295,7 +307,36 @@ Expected exported artifact:
 reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0.tcmdl
 ```
 
-## Step 7: Final Report To User
+## Step 7: Post-Stage-3 Tool Eval
+
+Run the same tool-call eval against the trained stage-3 artifact:
+
+```bash
+python3 benchmarks/run_stage_3_tool_eval.py \
+  --artifact-dir reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0 \
+  --output reports/runs/stage_3_tool_eval_after_stage3_report.json
+```
+
+Compare:
+
+```bash
+python3 - <<'PY'
+import json
+before=json.load(open("reports/runs/stage_3_tool_eval_after_stage2_report.json"))
+after=json.load(open("reports/runs/stage_3_tool_eval_after_stage3_report.json"))
+for key in [
+    "overall_score",
+    "tool_name_accuracy",
+    "argument_schema_pass_rate",
+    "argument_match_rate",
+    "no_tool_precision",
+    "final_answer_after_tool_rate",
+]:
+    print(key, "before=", before["metrics"].get(key), "after=", after["metrics"].get(key))
+PY
+```
+
+## Step 8: Final Report To User
 
 Report these fields:
 
@@ -316,6 +357,7 @@ Report these fields:
   `instruction_eval_mean_score`, `instruction_eval_passed`,
   `reference_completion_loss`, and `instruction_eval_score_per_100kib_bf16`;
 - export path and verify status for the `.tcmdl` artifact;
+- before/after stage-3 tool eval report paths and metric deltas;
 - any config changes made for OOM.
 
 Keep the report concise, but include exact paths and numbers.

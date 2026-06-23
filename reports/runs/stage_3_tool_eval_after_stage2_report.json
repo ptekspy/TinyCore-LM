@@ -1,0 +1,238 @@
+{
+  "suite_name": "stage_3_tool_eval_v0",
+  "runtime": "artifact",
+  "model": {
+    "model_type": "tinycore_recurrent_v0",
+    "vocab_size": 128,
+    "d_model": 32,
+    "n_heads": 4,
+    "n_layers": 4,
+    "n_virtual_layers": 4,
+    "n_families": 1,
+    "basis_rank": 2,
+    "low_rank": 4,
+    "recurrent_state_dim": 8,
+    "mlp_ratio": 2,
+    "max_seq_len": 64,
+    "dropout": 0.0,
+    "rope": false,
+    "tie_embeddings": true,
+    "precision_target": "fp32"
+  },
+  "num_cases": 8,
+  "metrics": {
+    "overall_score": 0.1875,
+    "num_passed": 0,
+    "tool_call_valid_rate": 0.0,
+    "tool_name_accuracy": 0.0,
+    "argument_schema_pass_rate": 0.0,
+    "argument_match_rate": 0.0,
+    "no_tool_precision": 1.0,
+    "final_answer_after_tool_rate": 0.0
+  },
+  "cases": [
+    {
+      "name": "weather_single_call",
+      "expected_tool": "get_weather",
+      "expected_args": {
+        "location": "London"
+      },
+      "completion": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQdvanunanannnnnnnnnnd(yeninnnnn yen||srnnnW,\"WWv(a,\"tokrenssoirokiioioiisstokreinikrnsssssussacsssssgggnnngnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": false,
+      "final_answer_expected": false,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.0,
+      "passed": false
+    },
+    {
+      "name": "currency_required_args",
+      "expected_tool": "convert_currency",
+      "expected_args": {
+        "amount": 10,
+        "base_currency": "USD",
+        "target_currency": "EUR"
+      },
+      "completion": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnuennnnnnnnnnnnnnnnnnnnnnnnnnnnnn]en]e\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]en]e\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnnnnnnnnn",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": false,
+      "final_answer_expected": false,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.0,
+      "passed": false
+    },
+    {
+      "name": "timer_arg_type",
+      "expected_tool": "set_timer",
+      "expected_args": {
+        "minutes": 5
+      },
+      "completion": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQdveunnnnnnnnnnnnnnnd|||||||||z]au(((((\u0013etouu,\"\"\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]en]e\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnn",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": false,
+      "final_answer_expected": false,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.0,
+      "passed": false
+    },
+    {
+      "name": "mcp_read_file",
+      "expected_tool": "read_file",
+      "expected_args": {
+        "path": "package.json"
+      },
+      "completion": "\n\n\n\n\n\n\n\n\n\n\nQdggaunnveueueuennnnd]euefte ce cernizzz l_vnr,\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ninnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn](((((((((\u0013ennnnnnnnnneeeeeeennnnnnnnnnnnnnnWWnnnt(",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": false,
+      "final_answer_expected": false,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.0,
+      "passed": false
+    },
+    {
+      "name": "mcp_search_docs",
+      "expected_tool": "search_files",
+      "expected_args": {
+        "query": "CUDA smoke"
+      },
+      "completion": "inninsk\"qsk|sokrusausosveusaunsssssssrynss)ssstusrenrnrnnnnnnnngannnnzetoruryenrytsrytsracr acsracs acksloknininininiiiininininnnnnnnnnnnnnnnnnnnnnnzzzzzzzzzzzz",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": false,
+      "final_answer_expected": false,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.0,
+      "passed": false
+    },
+    {
+      "name": "no_tool_creative_request",
+      "expected_tool": null,
+      "expected_args": {},
+      "completion": "izzzzzzzzzzzzzzzzzzzggririririririririiriiiiiiiiiiiiiiiiiiiiiicccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": true,
+      "final_answer_expected": true,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.5,
+      "passed": false
+    },
+    {
+      "name": "no_hallucinated_news_tool",
+      "expected_tool": null,
+      "expected_args": {},
+      "completion": "\n\n\n\nigni<ininnisonnninnnnnifestes||zzzzzzzzzzz(((((ytririiiiriiiriiiiiiiiiiiiiiiiiiiiiiiiininnnnnnnnnnnnnnnnnccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": true,
+      "final_answer_expected": true,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.5,
+      "passed": false
+    },
+    {
+      "name": "function_response_final_answer",
+      "expected_tool": null,
+      "expected_args": {},
+      "completion": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQdgsonnnnnnnnnnnnnnnd]ennnnnnnnn]es]es]enwssry ]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]en3]en]e\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQnnnnnnnnnnnnnnn",
+      "parsed_tool_call": {
+        "raw": "",
+        "valid_json": false,
+        "name": null,
+        "arguments": null,
+        "error": "no_json_object"
+      },
+      "tool_name_correct": false,
+      "argument_schema_passed": false,
+      "argument_match": false,
+      "no_tool_correct": true,
+      "final_answer_expected": true,
+      "final_answer_matches": [],
+      "final_answer_correct": false,
+      "schema_errors": [],
+      "score": 0.5,
+      "passed": false
+    }
+  ],
+  "wall_clock_time_sec": 3.288169609993929,
+  "artifact_dir": "reports/runs/instruction_code_permuted_tinycore/tinycore_recurrent_lr4_state8",
+  "generation": {
+    "max_new_tokens": 160,
+    "temperature": 0.0,
+    "seed": 1337
+  }
+}

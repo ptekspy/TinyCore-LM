@@ -194,6 +194,17 @@ eval:
 
 ## Smoke Run
 
+Before stage-3 training, run the tool-call eval against the current compact
+TinyCore artifact:
+
+```bash
+python3 benchmarks/run_stage_3_tool_eval.py \
+  --artifact-dir reports/runs/instruction_code_permuted_tinycore/tinycore_recurrent_lr4_state8 \
+  --output reports/runs/stage_3_tool_eval_after_stage2_report.json
+```
+
+This is the pre-stage-3 baseline. It is expected to score poorly.
+
 ```bash
 python3 - <<'PY'
 from dataclasses import replace
@@ -255,6 +266,35 @@ python3 -m tinycore_format.cli verify \
   reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0.tcmdl
 ```
 
+## Post-Stage-3 Tool Eval
+
+Run the same eval against the trained stage-3 artifact:
+
+```bash
+python3 benchmarks/run_stage_3_tool_eval.py \
+  --artifact-dir reports/runs/function_calling_stage3_5090_tinycore/tinycore_recurrent_function_calling_v0 \
+  --output reports/runs/stage_3_tool_eval_after_stage3_report.json
+```
+
+Compare before/after:
+
+```bash
+python3 - <<'PY'
+import json
+before=json.load(open("reports/runs/stage_3_tool_eval_after_stage2_report.json"))
+after=json.load(open("reports/runs/stage_3_tool_eval_after_stage3_report.json"))
+for key in [
+    "overall_score",
+    "tool_name_accuracy",
+    "argument_schema_pass_rate",
+    "argument_match_rate",
+    "no_tool_precision",
+    "final_answer_after_tool_rate",
+]:
+    print(key, "before=", before["metrics"].get(key), "after=", after["metrics"].get(key))
+PY
+```
+
 ## What To Report Back
 
 Report:
@@ -271,3 +311,4 @@ Report:
   `reference_completion_loss`, `instruction_eval_score_per_100kib_bf16`,
   and stored bytes;
 - export/verify status for the TinyCore `.tcmdl`.
+- pre-stage-3 and post-stage-3 tool eval report paths and metric deltas.
